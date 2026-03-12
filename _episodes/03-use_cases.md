@@ -51,7 +51,7 @@ as we saw in the last episode. We could download this file locally using
 Example command
 ```
 
-> Exercise:
+> ## `Exercise:`
 > Using the suggested tags, find the **latest** available datasets for:
 > - Neutral current (NC) DIS events for 10 GeV electrons colliding with 130 GeV protons
 > - Download **one** file from this dataset of your choice
@@ -94,7 +94,8 @@ As they may wish to process a full dataset, they might want to feed their script
 Example command to pipe dataset list to a file
 ```
 
-> Note: We have limited this to only pipe 5 files in the dataset to our list.
+> ## `Note:` 
+> We have limited this to only pipe 5 files in the dataset to our list.
 > Remove the `fragment` part of the command to instead print all lines.
 > Alternatively, edit this to be the number of lines that you want.
 {: .callout}
@@ -113,7 +114,7 @@ Python based streaming example
 Full working script
 ```
 
-> Exercise:
+> ## `Exercise:`
 > Using the suggested tags, find the **latest** available dataset for:
 > - Deeply Virtual Compton Scattering (DVCS) events from the EpIC event generator for 10 GeV electrons colliding with 130 GeV protons *without* background included
 > 1. Stream **one** file from this dataset in a script, check the number of events in this file
