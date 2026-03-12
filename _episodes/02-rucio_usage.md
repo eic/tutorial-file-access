@@ -149,6 +149,7 @@ Example command
 > Using tags, find the DIDs of the **latest**:
 > - DEMP events in the Q2 range of 3 to 10 for 10 GeV electrons on 250 GeV protons
 > - Print the full DID and check the number of files in the dataset
+>
 > **Hint** - Check the example name we looked at when introducing DIDs in a previous section.
 {: .challenge}
 

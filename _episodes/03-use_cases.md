@@ -26,12 +26,12 @@ This use case explores a user new to analysing ePIC data to try and look at a sp
 
 They may also want to only test a small subset of data to test and develop their analysis. **This use case is one example where downloading a small number of files locally may be beneficial**. 
 
-To find files that meet their requirements they could utilise the following tags...
+To find files that meet their requirements they could utilise the following tags:
 
--
--
--
--
+- software\_release
+- physics\_process
+- electron\_beam\_energy
+- ion\_beam\_energy
 
 We can use these tags to filter through the DIDs and find datasets of interest:
 
@@ -67,12 +67,15 @@ In this use case, we consider an experienced physics analyser that has a well de
 - A specific collider (energy and ion species) configuration
 - A datasets with machine backgrounds embedded in the simulated output files
 
-To find files that meet their requirements they could utilise the following tags...
+To find files that meet their requirements they could utilise the following tags:
 
--
--
--
--
+- software\_release
+- physics\_process
+- electron\_beam\_energy
+- ion\_beam\_energy
+- generator
+
+They may also want to use the `q2\_min` ad `q2\_max` tags, along with the `ion\_species` tags to narrow down to an even more specific subset of files. They may also want to analyse files with or without background enabled.
 
 As they want to process a large number of files, **it is unlikely (and not recommended) that they download a large number of files to process them locally**. Instead, they may want to stream their files directly in their analysis script. They could do this via
 
