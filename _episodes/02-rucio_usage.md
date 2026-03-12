@@ -22,9 +22,9 @@ Info on DIDs and datasets.
 The following tags are available as of March 2026:
 
 - software\_release
-  - Software release used in the simulation. Written as a container version tag:
+  - Software release used in the simulation. Written as a container version tag/simulation campaign naming:
   - v**YY**.**MM**.**v**
-  - E.g. v25.06.2 -> June 2025 Software Container, version 2
+  - E.g. v25.06.2 -> June 2025 software container, version 2
 - physics\_process
   - Defines the physics working group (PWG) that the simulated data relates to, options are:
   - excl\_diff\_tagging
