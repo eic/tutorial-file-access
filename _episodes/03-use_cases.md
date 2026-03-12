@@ -1,12 +1,11 @@
 ---
 title: "Use Cases"
-teaching: 30
-exercises: 30
+teaching: 10
+exercises: 40
 questions:
-- "How can I use Rucio to find the files for my analysis?"
-- "How do users work with Simulation Campaign Output?
+- "How do users interact with EIC/ePIC data?"
 objectives:
-- "Explore different use cases for ePIC simulation data"
+- "Explore different use cases for ePIC simulation data and how users work with EIC/ePIC data"
 - "Discover how simulation files can be utilised in further analysis"
 - "Know how to download files if needed (and when it might be needed)"
 keypoints:

@@ -1,13 +1,12 @@
 ---
 title: "Rucio Usage"
-teaching: 20
+teaching: 10
 exercises: 20
 questions:
 - "How can I use Rucio?"
 objectives:
 - "Become familiar with aspects of Rucio"
 - "Use Rucio tags to find specific types of files"
-
 keypoints:
 - "Rucio works with datasets and Data Identifiers (DIDs)"
 - "ePIC DIDs may look or be formatted like a nested filepath, but they are flat"

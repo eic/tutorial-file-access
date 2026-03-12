@@ -3,13 +3,15 @@ title: "Introduction"
 teaching: 10
 exercises: 
 questions:
-- "What is a simulation campaign?"
-- "How is the simulation campaign output organised?"
-- "How can I request a new simulation?"
-- "What tools are available to browse and access the simulation output?"
+- "How are EIC/ePIC simulation outputs organised??"
 objectives:
 - "Understand how the simulation output is organised"
+- "Find out how to request a new simulation?"
+- "Discover the tools that are available to browse and access the simulation output"
 keypoints:
+- "Simulation campaigns run on a regular (monthly basis)" 
+- "Input requests **must** be formatted in a specific way and meet certain pre-requisites"
+- "Rucio is the primary way to browse and access simulated EIC/ePIC data"
 ---
 
 ## Simulation Campaigns
