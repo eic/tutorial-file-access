@@ -88,11 +88,65 @@ Other names may not necessarily contain all of the same information, but as a ba
 
 Now that we know what a DID looks like, how can we find the DID corresponding to the file or dataset that we're interested in?
 
-...
-...
-...
+Well, we can list DIDs using -
 
-However, a much easier approach to finding what we need is to use the metadata tags that are assigned all DIDs from March 2026 onwards.
+```bash
+rucio did list scope:name
+```
+
+To begin though, let's try -
+
+```bash
+rucio did list --help
+```
+
+As we can see, we can apply filters to our list request if we want. We can also apply wildcards, but we need to be a bit careful due to the warning above. Whilst our DIDs *look* like a unix file path, they are not. The structure is flat. We can quickly see this if we try -
+
+```bash
+rucio did list epic:/RECO/\*
+```
+
+We get an enormous number of DIDs returned! This is every reconstruction related DID available to access right now.
+
+Working backwards from the full DID we had earlier, we could combine in the software release, detector configuration, process and generator to narrow down the list of DIDs
+
+```bash
+rucio did list epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/\*
+```
+
+We now have a more manageable list and we can see that we have some different beam energy configurations and Q2 ranges available. Note that we can list just the DID itself by adding `--short` as a prefix to our `did list` call.
+
+> ## `Pin for later:` 
+> If we used `short` as suggested to just get a list of DIDs, we could pipe this output to a file.
+> Each line would be the full DID for an item which we could potentially make use of.
+{: .callout}
+
+As we can see, in this case is a dataset. We can check the contents of this dataset too. Let's pick one of our DIDs and examine the content. We can do this via:
+
+```bash
+rucio did content list scope:name
+```
+e.g.
+
+```bash
+rucio did content list epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
+```
+
+Again, a lot of output. We see though that this DID is for a dataset of a large number of files. We can again us `--short` to just get this as a list:
+
+```bash
+rucio did content list --short epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
+```
+
+We can check where a specific file in our dataset is stored too:
+
+```bash
+rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root
+```
+
+The `root://dtn-eic.jlab.org` at the start of the output tells us that this particular file is stored on JLab servers. As mentioned in the outset, Rucio works across multiple sites easily, however, methods which we might use to stream files do not. **As such, being able to check where our files are stored is a useful feature.**
+
+So, we can find DIDs, check what they are and what they contain. To get to this point though, we needed some pre-knowledge of what the DID looked like which isn't necessarily that helpful for finding something. However, a much easier approach to finding what we need is to use the metadata tags that are assigned all DIDs from March 2026 onwards.
 
 ## Metadata Tags
 
@@ -153,7 +207,36 @@ Example command
 > **Hint** - Check the example name we looked at when introducing DIDs in a previous section.
 {: .challenge}
 
-## Using DIDs
+## Using DIDs - Downloading or Processing Files
 
- Info on checking DID info and downloading
-  
+So far we've seen how we can find DIDs and check some basic info such as what type of data they point to and where that data is stored. We generally want to do a bit more than that though. Typically we want to find data to *use* it in some way. For our simulation data, this is usually to analyse it! 
+
+We can download DIDs, containers, datasets or files, straightforwardly:
+
+```bash
+rucio download scope:name
+```
+
+So to download our file from earlier, we just do:
+
+```bash
+rucio download epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root
+```
+
+By default it will download to our current directory with its original name. In this case, that's unfortunate because as we noticed earlier, this looks a lot like a UNIX file path. As such, we now have a large number of nested directories to go through before we get to our file!
+
+> ## `Warning - Do you need the whole dataset?!`
+> Think very carefully before downloading a DID. What is it? If it's a full dataset, do you **really** need all of the data?
+> Generally you will not need a local copy of a full dataset. It's generally best to only download a small subset of files to test and run.
+> We can *stream* files from a full dataset rather than downloading them as we'll see in a moment.
+{: .caution}
+
+It might actually be easier to use xrootd to grab our file as it's a bit more intuitive, we do need our location from earlier for this though:
+
+```bash
+xrdcp root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root ./
+```
+
+Where `./` is our current directory, this time, we'll just get the actual file! We could also specify a new name if desired in place of just `./`.
+
+Our full path, including location, as used here will also be useful if we want to stream our files directly in a script.

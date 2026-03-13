@@ -39,6 +39,14 @@ We can use these tags to filter through the DIDs and find datasets of interest:
 Example command
 ```
 
+> ## `Beam Energies:` 
+> Whilst we can enter any number for the `electron\_beam\_energy` and `ion\_beam\_energy` values, there are only certain combinations actually in use.
+> `electron\_beam\_energy` is typically 5, 10 or 18 GeV
+> `ion\_beam\_energy` is typically 41, 100, 130, 250 or 275 for protons.
+> For other ion species, 110 and 166 may also be used.
+{: .callout}
+
+
 Once we have identified a specific dataset of interest, we can look at the files within it using:
 
 ```bash
