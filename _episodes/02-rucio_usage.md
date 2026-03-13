@@ -117,7 +117,8 @@ rucio did list epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/\
 We now have a more manageable list and we can see that we have some different beam energy configurations and Q2 ranges available. Note that we can list just the DID itself by adding `--short` as a prefix to our `did list` call.
 
 > ## `Pin for later:` 
-> If we used `short` as suggested to just get a list of DIDs, we could pipe this output to a file.
+> If we used `--short` as suggested to just get a list of DIDs, we could pipe this output to a file.
+>
 > Each line would be the full DID for an item which we could potentially make use of.
 {: .callout}
 
@@ -225,9 +226,11 @@ rucio download epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/1
 
 By default it will download to our current directory with its original name. In this case, that's unfortunate because as we noticed earlier, this looks a lot like a UNIX file path. As such, we now have a large number of nested directories to go through before we get to our file!
 
-> ## `Warning - Do you need the whole dataset?!`
+> ## `Warning - Do you need the whole dataset?`
 > Think very carefully before downloading a DID. What is it? If it's a full dataset, do you **really** need all of the data?
+>
 > Generally you will not need a local copy of a full dataset. It's generally best to only download a small subset of files to test and run.
+>
 > We can *stream* files from a full dataset rather than downloading them as we'll see in a moment.
 {: .caution}
 
@@ -239,4 +242,65 @@ xrdcp root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterl
 
 Where `./` is our current directory, this time, we'll just get the actual file! We could also specify a new name if desired in place of just `./`.
 
-Our full path, including location, as used here will also be useful if we want to stream our files directly in a script.
+Our full path, including location, as used here, will also be useful if we want to stream our files directly in a script. In ROOT, we could just do:
+
+```c++
+auto f = TFile::Open("root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root")
+```
+
+or using python and uproot:
+
+```python
+import uproot
+import XRootD
+file_path = "root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root"
+root_file = uproot.open(file_path)
+```
+
+or directly with Pyroot:
+
+```python
+import ROOT
+import XRootD
+file_path = "root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root"
+file = ROOT.TFile.Open(file_path, "READ")
+```
+
+### Testing File Streaming
+
+We can quickly check the three methods above work.
+
+To test the ROOT approach, we can make a macro called `Test.C` and add:
+
+```c++
+void Test(){
+  auto f = TFile::Open("root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root");
+  auto tree = f->Get<TTree>("events");
+  Long64_t nEntries = tree->GetEntries(); // read the number of entries in the tree
+  cout << nEntries << " events in tree" << endl;
+}
+```
+
+If we run this script with `root Test.C`, it should stream our file and print the number of entries (the number of events) in the file.
+
+Similarly in Python, we can make `Test.py` and use Uproot:
+
+```python
+import uproot
+import XRootD
+file_path = "root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root"
+root_file = uproot.open(file_path)
+print(root_file['events'].num_entries, "events in this tree.")
+
+```
+or directly using PyRoot:
+
+```python
+import ROOT
+import XRootD
+file_path = "root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root"
+file = ROOT.TFile.Open(file_path, "READ")
+print((file.Get("events")).GetEntries(), "events in this tree.")
+```
+
+All three approaches should yield the same result. 
