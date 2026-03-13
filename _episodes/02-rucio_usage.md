@@ -7,10 +7,12 @@ questions:
 objectives:
 - "Become familiar with aspects of Rucio"
 - "Use Rucio tags to find specific types of files"
+- "Learn how to download or stream files for further use."
 keypoints:
 - "Rucio works with datasets and Data Identifiers (DIDs)"
 - "ePIC DIDs may look or be formatted like a nested filepath, but they are flat"
 - "Tags can be used to quickly sort and find data of interest"
+- "Once you find the file location with Rucio, you can use xrootd to download or stream it too"
 ---
 
 ## Getting Started
