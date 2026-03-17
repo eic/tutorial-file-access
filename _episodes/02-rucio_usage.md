@@ -42,7 +42,7 @@ To use Rucio further, we will need to briefly look at how Rucio organises data.
 
 ## Datasets and DIDs
 
-Typically, we want to analyse data contained within specific files. Files can be grouped together into datasets which can themselves, be grouped into containers. All three refer to "data". As such, the term "data identifier` or **DID** is used to represent any set of files, datasets or containers in Rucio. a DID is just the name of a single file, dataset or container.
+Typically, we want to analyse data contained within specific files. Files can be grouped together into datasets which can themselves, be grouped into containers. All three refer to "data". As such, the term "data identifier` or **DID** is used in Rucio. A DID is just the name of a single file, dataset or container.
 
 In Rucio, all DIDs follow a naming scheme which is composed of two strings - a **scope** and a **name**, formatted as -
 
