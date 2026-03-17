@@ -3,7 +3,7 @@ title: "Introduction"
 teaching: 10
 exercises: 
 questions:
-- "How are EIC/ePIC simulation outputs organised??"
+- "How are EIC/ePIC simulation outputs organised?"
 objectives:
 - "Understand how the simulation output is organised"
 - "Find out how to request a new simulation"
