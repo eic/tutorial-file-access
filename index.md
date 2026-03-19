@@ -7,8 +7,10 @@ permalink: index.html  # Is the only page that doesn't follow the pattern /:path
 Welcome to the EIC/ePIC tutorial on file access. This tutorial will explore how to find and access EIC/ePIC simulation data using Rucio. Usage of metadata tags to quickly find data will be explored as well as some example use cases.
 
 > ## Prerequisites
-> Knowledge of CERN ROOT and/or Python/RDataFrames
-> Experience/knowledge of working in UNIX environments and familiarty with running via the command line
+> Experience/knowledge of CERN ROOT and/or Python.
+>
+> Experience/knowledge of working in UNIX environments and familiarty with running via the command line.
+>
 > This tutorial follows other tutorial in the EIC series:
 > - [Setting Up Your Environment](https://eic.github.io/tutorial-setting-up-environment/)
 >
