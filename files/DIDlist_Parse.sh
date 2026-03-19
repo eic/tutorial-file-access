@@ -41,7 +41,7 @@ PathListFile="${Path}/${DID_Edit}_DID_Pathlist"
 # Need to switch this to name the DID pathlist nicely
 touch "${PathListFile}" # Open the file which will contain the path list
 
-rucio replica list file --protocols root --pfns --rses isopenaccess ${Scope}:${DID} >> ${PathListFile}
+rucio replica list file --protocols root --pfns --rses isopenaccess ${Scope}:${DID} > ${PathListFile}
 
 echo "Parsed provided DID - $DID"
 echo "All files locations within this dataset have been printed to ${PathListFile}" # Need to automate this in future such that the file is named sensibly
