@@ -62,7 +62,7 @@ To browse the campaign output and find the files we want, we can use [Rucio](htt
 
 You may find reference to or instructions on using Xrootd to browse and access files.These may still work and indeed, we will use some of these commands later in this tutorial. However, Rucio is now the preferred method for the cases we will examine.
 
-Why? This change isn't just to make everybody learn something new, it is also a consequence of the expansion of the volume of ePIC data now available. Previously (before 20260, all simulated data was stored on Jefferson Lab servers. However, data is now spread between multiple sites. This makes finding an accessing it using XrootD more complicated. Rucio can deal with this "issue" in a straightforward way.
+Why? This change isn't just to make everybody learn something new, it is also a consequence of the expansion of the volume of ePIC data now available. Previously (before 2026), all simulated data was stored on Jefferson Lab servers. However, data is now spread between multiple sites. This makes finding an accessing it using XrootD more complicated. Rucio can deal with this "issue" in a straightforward way.
 
 > You may also find reference to an S3 server. This is now deprecated and cannot be used. 
 > If you find such references or instructions to S3 server usage in tutorial material, please raise an issue on the GitHub page for this tutorial flagging that this should be removed.
