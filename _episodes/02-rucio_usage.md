@@ -110,6 +110,11 @@ rucio did list epic:/RECO/\*
 
 We get an enormous number of DIDs returned! This is every reconstruction related DID available to access right now.
 
+> ## `Warning - Check the campaign date!`
+>  If you encounter any issues when processing the DID listed earlier, it may be due to the software release version.
+>  Remember that campaigns older than ~6 months will not be instantly accessible. Try switching to a more recent campaign version.
+{: .caution}
+
 Working backwards from the full DID we had earlier, we could combine in the software release, detector configuration, process and generator to narrow down the list of DIDs:
 
 ```bash
