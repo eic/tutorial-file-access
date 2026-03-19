@@ -4,7 +4,7 @@
 if [ "$#" -ne 1 ]; then
     echo ""
     echo "!!! ERROR !!! - Expected 1 argument - !!! ERROR !!!"
-    echo "Expect - DID dataset to parse"
+    echo "Expect - DID for a dataset to parse"
     echo "!!! ERROR !!! - Expected 1 argument - !!! ERROR !!!"
     echo ""
     exit 0

@@ -32,6 +32,8 @@ These are linked to specific software releases following the same format.
 
 Various types of files are produced as part of the simulation campaign as we will discuss in the next section. The files you may wish to access will differ depending upon your use case. In this tutorial, we will explore a few different common use cases and the types of files you may want in each.
 
+### Submitting a New Simulation Request
+
 If you would like to submit a new request to a future campaign for a dataset that is not in production, please follow the following process:
 
 1. Coordinate with your physics or detector working group and the detector subsystem or physics analysis co-ordinators to add your request to the overview spreadsheet and assign a priority. 
@@ -65,6 +67,3 @@ Why? This change isn't just to make everybody learn something new, it is also a 
 > You may also find reference to an S3 server. This is now deprecated and cannot be used. 
 > If you find such references or instructions to S3 server usage in tutorial material, please raise an issue on the GitHub page for this tutorial flagging that this should be removed.
 {: .callout}
-
-
-
