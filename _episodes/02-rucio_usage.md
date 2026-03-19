@@ -7,7 +7,7 @@ questions:
 objectives:
 - "Become familiar with aspects of Rucio"
 - "Use Rucio tags to find specific types of files"
-- "Learn how to download or stream files for further use."
+- "Learn how to download or stream files for further use"
 keypoints:
 - "Rucio works with datasets and Data Identifiers (DIDs)"
 - "ePIC DIDs may look or be formatted like a nested filepath, but they are flat"
@@ -124,7 +124,7 @@ We now have a more manageable list and we can see that we have some different be
 > Each line would be the full DID for an item which we could potentially make use of.
 {: .callout}
 
-As we can see, in this case is a dataset. We can check the contents of this dataset too. Let's pick one of our DIDs and examine the content. We can do this via:
+As we can see, the DIDs we have in our list now are all datasets. We can check the contents of these datasets too. Let's pick one of our DIDs and examine the content. We can do this via:
 
 ```bash
 rucio did content list scope:name
