@@ -134,6 +134,7 @@ As we can see, the DIDs we have in our list now are all datasets. We can check t
 ```bash
 rucio did content list scope:name
 ```
+
 e.g.
 
 ```bash
@@ -151,6 +152,14 @@ We can check where a specific file in our dataset is stored too:
 ```bash
 rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root
 ```
+
+> ## `list file comment:` 
+> Despite the slightly misleading command above, we can actually just provide a dataset DID here too. If we do so, we will get the location of all files in the dataset in one command, e.g:
+>
+> ```bash
+> rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
+> ```
+{: .callout}
 
 The `root://dtn-eic.jlab.org` at the start of the output tells us that this particular file is stored on JLab servers. As mentioned in the outset, Rucio works across multiple sites easily, however, methods which we might use to stream files do not. **As such, being able to check where our files are stored is a useful feature.**
 
