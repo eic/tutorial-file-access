@@ -1,4 +1,4 @@
-# EIC Tutorial: File Accessx
+# EIC Tutorial: File Access
 
 This repository generates the corresponding lesson website from [The Carpentries](https://carpentries.org/) repertoire of lessons. 
 
