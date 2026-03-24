@@ -123,6 +123,14 @@ rucio did list epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/\
 
 We now have a more manageable list and we can see that we have some different beam energy configurations and Q2 ranges available. Note that we can list just the DID itself by adding `--short` as a prefix to our `did list` call.
 
+We could also make slightly better use of wildcards in this command too:
+
+```bash
+rucio did list epic:*RECO*26.02.0*DEMP*
+```
+
+But as above, this does require some knowledge of what our DID looks like to begin with.
+
 > ## `Pin for later:` 
 > If we used `--short` as suggested to just get a list of DIDs, we could pipe this output to a file.
 >
@@ -159,6 +167,15 @@ rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/2
 > ```bash
 > rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
 > ```
+> You could pope this to a file for later usage. However, note that replicas may exist for a given file. Both would be printed by this command as is. You can check if multiple copies exist via:
+> ```bash
+> rucio rule list --did scope:name
+> ```
+> e.g.
+> ```bash
+> rucio rule list --did epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
+> ```
+> This will list where the DID is stored and how many copies exist.
 {: .callout}
 
 The `root://dtn-eic.jlab.org` at the start of the output tells us that this particular file is stored on JLab servers. As mentioned in the outset, Rucio works across multiple sites easily, however, methods which we might use to stream files do not. **As such, being able to check where our files are stored is a useful feature.**
@@ -213,7 +230,13 @@ As noted on some items in this list, some tags are optional and may not be appli
 We can use these tags to filter through the available datasets and identify those of interest to us. For example:
 
 ```bash
-Example command
+rucio did list --filter 'TAG==*' 'scope:*'
+```
+
+So, as an example, we could all DIDs using the latest software release (v26.03.0) via:
+
+```bash
+rucio did list --filter 'software_release==26.03.0*' 'epic:*'
 ```
 
 > ## `Exercise:`
