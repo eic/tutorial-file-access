@@ -22,7 +22,7 @@ A list of current request from Detector Subsystem Co-ordinators and the Physics 
 
 Campaigns are designated by a standardised format - **YY.MM.Ver**
 - YY - Year the campaign ran, e.g. 26 is 2026
-- MM - Month the campaign ran, e.g. 02 is January
+- MM - Month the campaign ran, e.g. 02 is February
 - Ver - Version of the campaign, starts from 0. May have different versions
 
 These are linked to specific software releases following the same format.
