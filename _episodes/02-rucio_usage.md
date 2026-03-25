@@ -186,11 +186,11 @@ So, we can find DIDs, check what they are and what they contain. To get to this 
 
 The following tags are available as of March 2026:
 
-- software\_release
+- **software\_release**
   - Software release used in the simulation. Written as a container version tag/simulation campaign naming:
   - v**YY**.**MM**.**v**
   - E.g. v25.06.2 -> June 2025 software container, version 2
-- physics\_process
+- **requester\_pwg**
   - Defines the physics working group (PWG) that the simulated data relates to, options are:
   - excl\_diff\_tagging
   - inclusive
@@ -199,21 +199,22 @@ The following tags are available as of March 2026:
   - ew\_bsm
   - other
   - **Can be one or more**
-- q2\_min
+- **q2\_min**
   - Minumum Q2 value (GeV^2) in the simulation file, entered as a number.
   - **Optional tag** - Not all simulated files use this
-- q2\_max
+- **q2\_max**
   - Maximum Q2 value (GeV^2) in the simulation file, entered as a number.
   - **Optional tag** - Not all simulated files use this
-- electron\_beam\_energy
+- **electron\_beam\_energy**
   - Electron beam energy in GeV
-- ion\_beam\_energy
+- **ion\_beam\_energy**
   - Ion/nucleus beam energy in GeV
-- is\_background\_mixed
+- **is\_background\_mixed**
   - True/false depending upon whether sample includes any background mixing
-- ion\_species
+- **ion\_species**
   - Ion species in the simulation, defaults to `p`, proton, if not specified
-- generator
+  - Typed as formatted in files, e.g. `Au197` for gold, `He3` for helium 3 etc.
+- **generator**
   - MC event generator used to generate the simulated data
   - E.g. Pythia8, Herwig etc
   
