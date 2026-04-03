@@ -251,7 +251,7 @@ We can also combine tags and filter on several at once, e.g:
 rucio did list --filter 'electron_beam_energy==10, ion_beam_energy==250' 'epic:*'
 ```
 
-which will return only datasets with 10x250 collisions (10 GeV electron on 250 GeV ions using the standard ePIC conventions). We can keep adding filters in this manner as we like to really narrow down the DIDs we return with our query.
+which will return only datasets with 10x250 collisions (10 GeV electrons on 250 GeV ions using the standard ePIC conventions). We can keep adding filters in this manner as we like to really narrow down the DIDs we return with our query.
 
 > ## `Exercise:`
 > Using tags, find the DIDs of the **latest**:

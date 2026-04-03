@@ -93,7 +93,7 @@ To find files that meet their requirements they could utilise the following tags
 - ion\_beam\_energy
 - generator
 
-They may also want to use the `q2\_min` ad `q2\_max` tags, along with the `ion\_species` tags to narrow down to an even more specific subset of files. They may also want to analyse files with or without background enabled.
+They may also want to use the `q2_min` ad `q2_max` tags, along with the `ion_species` tags to narrow down to an even more specific subset of files. They may also want to analyse files with or without background enabled.
 
 As they want to process a large number of files, **it is unlikely (and not recommended) that they download a large number of files to process them locally**. Instead, they may want to stream their files directly in their analysis script. They could do this via:
 
@@ -168,7 +168,7 @@ with open('FileList', 'r') as file:
     # print(ak.type(chunk))
 ```
 
-Note that we have restricted these examples to only print out the first five files in the list we created. We can comment out the lines noted to process the full list (or adjust the cutoff value in the condition to process a different number).
+Note that we have restricted these examples to only print out the first five files in the list we created. We can comment out or change the lines as noted to process the full list (or adjust the cutoff value in the condition to process a different number).
 
 > ## `Exercise:`
 > Using the suggested tags, find the **latest** available dataset for:
@@ -186,9 +186,7 @@ Discussion of use case based upon SIM data - To be added soon.
 
 That wraps up our introduction to using Rucio and some example use cases and scenarios.
 
-New tags may be added in the future. We're welcome to take on board any suggestions or changes as we roll out Rucio and it becomes more widely used. Get in touch via:
-
-`stephen.kay@york.ac.uk` 
+New tags may be added in the future. We're welcome to take on board any suggestions or changes as we roll out Rucio and it becomes more widely used. Get in touch via - [stephen.kay@york.ac.uk](stephen.kay@york.ac.uk) 
 
 or on Mattermost with suggestions, comments and feedback.
 
