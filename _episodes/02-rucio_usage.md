@@ -192,12 +192,12 @@ The following tags are available as of March 2026:
   - E.g. v25.06.2 -> June 2025 software container, version 2
 - **requester\_pwg**
   - Defines the physics working group (PWG) that the simulated data relates to, options are:
-  - excl\_diff\_tagging
-  - inclusive
-  - jets\_hf
-  - semi\_inclusive
-  - ew\_bsm
-  - other
+    - edt (exclusive, diffractive and tagging)
+    - inclusive
+    - jets\_hf
+    - semi\_inclusive
+    - ew\_bsm
+    - other
   - **Can be one or more**
 - **q2\_min**
   - Minumum Q2 value (GeV^2) in the simulation file, entered as a number.
@@ -213,11 +213,14 @@ The following tags are available as of March 2026:
   - True/false depending upon whether sample includes any background mixing
 - **ion\_species**
   - Ion species in the simulation, defaults to `p`, proton, if not specified
-  - Typed as formatted in files, e.g. `Au197` for gold, `He3` for helium 3 etc.
+    - Typed as formatted in files, e.g. `Au197` for gold, `He3` for helium 3 etc.
+    - `Cu63`, `H2`, `Ru96` and `p` are some other options 
 - **generator**
   - MC event generator used to generate the simulated data
   - E.g. Pythia8, Herwig etc
-  
+  - Entered as all lower case
+    - E.g. `dempgen` *not* `DEMPgen`
+
 As noted on some items in this list, some tags are optional and may not be applied to all datasets. However, the following tags are **required** for all datasets:
 
 - software\_release
@@ -228,17 +231,27 @@ As noted on some items in this list, some tags are optional and may not be appli
 - ion\_species
 - generator
 
+Note that as mentioned for the generator, tags are entered in lower case, **with the exception of ion species**.
+
 We can use these tags to filter through the available datasets and identify those of interest to us. For example:
 
 ```bash
 rucio did list --filter 'TAG==*' 'scope:*'
 ```
 
-So, as an example, we could all DIDs using the latest software release (v26.03.0) via:
+So, as an example, we could list all DIDs with electron beam energies of 10 GeV via:
 
 ```bash
-rucio did list --filter 'software_release==26.03.0*' 'epic:*'
+rucio did list --filter 'electron_beam_energy==10' 'epic:*'
 ```
+
+We can also combine tags and filter on several at once, e.g:
+
+```bash
+rucio did list --filter 'electron_beam_energy==10, ion_beam_energy==250' 'epic:*'
+```
+
+which will return only datasets with 10x250 collisions (10 GeV electron on 250 GeV ions using the standard ePIC conventions). We can keep adding filters in this manner as we like to really narrow down the DIDs we return with our query.
 
 > ## `Exercise:`
 > Using tags, find the DIDs of the **latest**:

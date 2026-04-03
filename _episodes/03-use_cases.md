@@ -29,35 +29,45 @@ They may also want to only test a small subset of data to test and develop their
 To find files that meet their requirements they could utilise the following tags:
 
 - software\_release
-- physics\_process
+- requester\_pwg
 - electron\_beam\_energy
 - ion\_beam\_energy
+- ion\_species
 
 We can use these tags to filter through the DIDs and find datasets of interest:
 
 ```bash
-Example command
+rucio did list --filter 'software_release==XXX, requester_pwg==YYY, electron_beam_energy==ZZ, ion_beam_energy==iii, ion_species==jjj' 'epic:*'
 ```
+
+Where we can substitute in our chosen values for each in place of `XXX`, `YYY`, `ZZ`, `iii` and `jjj`.
 
 > ## `Beam Energies:` 
 > Whilst we can enter any number for the `electron_beam_energy` and `ion_beam_energy` values, there are only certain combinations actually in use.
 > `electron_beam_energy` is typically 5, 10 or 18 GeV
-> `ion_beam_energy` is typically 41, 100, 130, 250 or 275 for protons.
+> `ion_beam_energy` is typically 41, 100, 130, 250 or 275 GeV for protons.
 > For other ion species, 110 and 166 may also be used.
 {: .callout}
-
 
 Once we have identified a specific dataset of interest, we can look at the files within it using:
 
 ```bash
-Example command
+rucio did content list scope:name
 ```
 
-as we saw in the last episode. We could download this file locally using
+and we can get locations of the files within the dataset via:
 
 ```bash
-Example command
+rucio replica list file --protocols root --pfns --rses isopenaccess scope:name_of_file
+rucio replica list file --protocols root --pfns --rses isopenaccess scope:name_of_Dataset
 ```
+as we saw in the last episode. We can get just the location of a specific file OR the location of all files within the dataest, depending upon which we specify. We could download this file locally using
+
+```bash
+xrdcp FILEPATH ./
+```
+
+where `FILEPATH` is the path to one specific file from the output of one of the rucio commands above.
 
 > ## `Exercise:`
 > Using the suggested tags, find the **latest** available datasets for:
@@ -85,45 +95,80 @@ To find files that meet their requirements they could utilise the following tags
 
 They may also want to use the `q2\_min` ad `q2\_max` tags, along with the `ion\_species` tags to narrow down to an even more specific subset of files. They may also want to analyse files with or without background enabled.
 
-As they want to process a large number of files, **it is unlikely (and not recommended) that they download a large number of files to process them locally**. Instead, they may want to stream their files directly in their analysis script. They could do this via
+As they want to process a large number of files, **it is unlikely (and not recommended) that they download a large number of files to process them locally**. Instead, they may want to stream their files directly in their analysis script. They could do this via:
 
 ```c++
-root based streaming example
-Full working script
+auto f = TFile::Open("FILEPATH");
+auto tree = f->Get<TTree>("events");
 ```
 
-or if they're using python -
+or if they're using python:
 
 ```python
-Python based streaming example
-Full working script
+import uproot
+import XRootD
+file_path = "FILEPATH"
+root_file = uproot.open(file_path)
 ```
 
-As they may wish to process a full dataset, they might want to feed their script a full list of files to stream and run. They could print the full list of files in a dataset via -
+As they may wish to process a full dataset, they might want to feed their script a full list of files to stream and run. They could print the full list of files in a dataset:
 
 ```bash
-Example command to pipe dataset list to a file
+rucio replica list file --protocols root --pfns --rses isopenaccess scope:name_of_Dataset > FileList
 ```
 
-> ## `Note:` 
-> We have limited this to only pipe 5 files in the dataset to our list.
-> Remove the `fragment` part of the command to instead print all lines.
-> Alternatively, edit this to be the number of lines that you want.
-{: .callout}
-
-This could then be processed in the script via -
+This could then be processed in the script:
 
 ```c++
-root based streaming example
-Full working script
+void FileListProcess(){
+  string line;
+  ifstream fstream ("FileList");
+  int FileCount = 0;
+  //TChain *AnalysisChain = new TChain("events"); // We could define a chain to process our files too and add them as we scan over our list
+  while(getline(fstream, line)){
+    if (FileCount > 5) continue; // Stop loop after 5 files, comment out to read full file
+    // Check file exists
+    TString tmpFile{line};
+    auto RootFile = TFile::Open(tmpFile);
+    if(!RootFile){ // Check file exists
+      cout << "File not found:"<<tmpFile << endl;
+      continue;
+    }
+    cout << "Found file - " << line << endl;
+    //AnalysisChain->Add(tmpFile) // Add to our chain if we want
+    FileCount++;
+  }
+}
 ```
 
-or if they're using python -
+or if they're using python:
 
 ```python
-Python based streaming example
-Full working script
+import ROOT
+import uproot
+import XRootD
+import awkward as ak
+
+Files=[]
+
+with open('FileList', 'r') as file:
+    lines_list = file.readlines()
+    for line in lines_list[:5]: # Read only lines 0:5 - remove [:5] to read all or change 5 to N where N is the number of lines you want
+        file_path = line.rstrip() # rstrip to remove trailing white space/new lines
+        try:
+            with uproot.open(file_path) as file:
+                Files.append(file_path) # Add file path to array
+                print("Found file - ", file_path, "and appended to list for processing.")
+        except Exception as e:
+            print(f"Could not open file: {e}")
+        
+# Use the uproot iterate method to process our list of files - See https://uproot.readthedocs.io/en/stable/uproot.behaviors.TBranch.iterate.html
+#for chunk in uproot.iterate({f: "events" for f in Files}, expressions=["MCParticles.PDG"]): # Open files in array f and process events tree with branches specified
+    # Process each chunk - Do something
+    # print(ak.type(chunk))
 ```
+
+Note that we have restricted these examples to only print out the first five files in the list we created. We can comment out the lines noted to process the full list (or adjust the cutoff value in the condition to process a different number).
 
 > ## `Exercise:`
 > Using the suggested tags, find the **latest** available dataset for:
@@ -133,14 +178,20 @@ Full working script
 > 3. Stream **five** of the files in this dataset in a script, check the total number of events contained in all five files.
 {: .challenge}
 
-## Detector Designer/Optimiser
+## Detector Designer/Optimiser, Algorithm/Reconstruction Development
 
-Discussion of use case based upon SIM data
+Discussion of use case based upon SIM data - To be added soon.
 
-## Algorithm/Reconstruction Development
+## Conclusion and Comments
 
-Discussion of use case based upon SIM data and tags - merge with previous?
+That wraps up our introduction to using Rucio and some example use cases and scenarios.
 
-## General Comments
+New tags may be added in the future. We're welcome to take on board any suggestions or changes as we roll out Rucio and it becomes more widely used. Get in touch via:
 
-Some general comments and info. Pointers, things to avoid or recommendations etc.
+`stephen.kay@york.ac.uk` 
+
+or on Mattermost with suggestions, comments and feedback.
+
+Remember to consider whether you need full datasets before downloading them and keep an eye on whether your files have multiple open access copies when making file lists.
+
+Also, if you find any nice tricks or develop short scripts (maybe one which makes a file list for the latest version of a dataset based upon inputs?) then feel free to share them too!
