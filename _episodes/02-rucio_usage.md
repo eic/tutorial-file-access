@@ -167,7 +167,7 @@ rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/2
 > ```bash
 > rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
 > ```
-> You could pope this to a file for later usage. However, note that replicas may exist for a given file. Both would be printed by this command as is. You can check if multiple copies exist via:
+> You could pipe this to a file for later usage. However, note that replicas may exist for a given file. Both would be printed by this command as is. You can check if multiple copies exist via:
 > ```bash
 > rucio rule list --did scope:name
 > ```
