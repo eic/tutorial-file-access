@@ -30,22 +30,23 @@ To find files that meet their requirements they could utilise the following tags
 
 - software\_release
 - requester\_pwg
-- electron\_beam\_energy
-- ion\_beam\_energy
+- electron\_beam\_energy\_gev
+- ion\_beam\_energy\_gev
 - ion\_species
+- data\_level
 
 We can use these tags to filter through the DIDs and find datasets of interest:
 
 ```bash
-rucio did list --filter 'software_release==XXX, requester_pwg==YYY, electron_beam_energy==ZZ, ion_beam_energy==iii, ion_species==jjj' 'epic:*'
+rucio did list --filter 'software_release==XXX, requester_pwg==YYY, electron_beam_energy_gev==ZZ, ion_beam_energy_gev==iii, ion_species==jjj' 'epic:*'
 ```
 
 Where we can substitute in our chosen values for each in place of `XXX`, `YYY`, `ZZ`, `iii` and `jjj`.
 
 > ## `Beam Energies:` 
-> Whilst we can enter any number for the `electron_beam_energy` and `ion_beam_energy` values, there are only certain combinations actually in use.
-> `electron_beam_energy` is typically 5, 10 or 18 GeV
-> `ion_beam_energy` is typically 41, 100, 130, 250 or 275 GeV for protons.
+> Whilst we can enter any number for the `electron_beam_energy_gev` and `ion_beam_energy_gev` values, there are only certain combinations actually in use.
+> `electron_beam_energy_gev` is typically 5, 10 or 18 GeV
+> `ion_beam_energy_gev` is typically 41, 100, 130, 250 or 275 GeV for protons.
 > For other ion species, 110 and 166 may also be used.
 {: .callout}
 
@@ -89,11 +90,12 @@ To find files that meet their requirements they could utilise the following tags
 
 - software\_release
 - physics\_process
-- electron\_beam\_energy
-- ion\_beam\_energy
+- electron\_beam\_energy\_gev
+- ion\_beam\_energy\_gev
 - generator
+- data\_level
 
-They may also want to use the `q2_min` ad `q2_max` tags, along with the `ion_species` tags to narrow down to an even more specific subset of files. They may also want to analyse files with or without background enabled.
+They may also want to use the `q2_min_gev2` ad `q2_max_gev2` tags, along with the `ion_species` tags to narrow down to an even more specific subset of files. They may also want to analyse files with or without background enabled.
 
 As they want to process a large number of files, **it is unlikely (and not recommended) that they download a large number of files to process them locally**. Instead, they may want to stream their files directly in their analysis script. They could do this via:
 
