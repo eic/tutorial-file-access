@@ -304,7 +304,7 @@ By default it will download to our current directory with its original name. In 
 > We can *stream* files from a full dataset rather than downloading them as we'll see in a moment.
 {: .caution}
 
-It might actually be easier to use xrootd to grab our file as it's a bit more intuitive, we do need our location from earlier for this though:
+It might actually be easier to use [XrootD]({{ page.root }}{% link _extras/xrootd.md %}) to grab our file as it's a bit more intuitive, we do need our location from earlier for this though:
 
 ```bash
 xrdcp root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root ./
