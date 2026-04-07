@@ -10,7 +10,7 @@ In the tutorial, we used XrootD to copy files and to stream files. We could also
 
 Unlike Rucio, if we use XrootD, we *do* have a file structure. Typically, file paths typically look like:
 
-- /volatile/eic/EPIC/<span style="color:#1845fb">OUTPUT_TYPE</span>/<span style="color:#ff5e02">CAMPAGIN</span>/<span style="color:#c91f16">DETECTOR_GEOMETRY</span>/<span style="color:#c849a9">PHYSICS_PROCESS_TYPE<\span>/<span style="color:#adad7d">PHYSICS_PROCESS</span>/<span style="color:#86c8dd">BEAM_ENERGY</span>/<span style="color:#578dff">OTHER_CONDITIONS</span> /FILE.eicrecon.edm4eic.root
+- /volatile/eic/EPIC/<span style="color:#1845fb">OUTPUT_TYPE</span>/<span style="color:#ff5e02">CAMPAGIN</span>/<span style="color:#c91f16">DETECTOR_GEOMETRY</span>/<span style="color:#c849a9">PHYSICS_PROCESS_TYPE</span>/<span style="color:#adad7d">PHYSICS_PROCESS</span>/<span style="color:#86c8dd">BEAM_ENERGY</span>/<span style="color:#578dff">OTHER_CONDITIONS</span>/FILE.eicrecon.edm4eic.root
   - <span style="color:#1845fb">OUTPUT_TYPE</span>  - Is this event generator, simulation or reconstruction output?
   - <span style="color:#ff5e02">CAMPAIGN</span>  - Which simulation campaign is this from?
   - <span style="color:#c91f16">DETECTOR_GEOMETRY</span>  - Which detector geometry/design was used to run this simulation?
