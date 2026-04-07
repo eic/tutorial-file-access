@@ -182,7 +182,26 @@ Note that we have restricted these examples to only print out the first five fil
 
 ## Detector Designer/Optimiser, Algorithm/Reconstruction Development
 
-Discussion of use case based upon SIM data - To be added soon.
+In this use case, someone updating the design of a detector in DD4HEP, or adjusting a reconstruction algorithm for a detector, may not want full reconstructed data. Instead, they may want more raw, hit level information. They may also want a specific detector configuration for comparison. In terms of physics process, they may not be looking at an actual reaction at all, but a particle gun simulation. Some tags they might use to find their data include:
+
+- software\_release
+- data\_level
+- requester\_dsc
+- geometry\_config
+- gun\_particle
+- gun\_momentum\_min\_gev
+- gun\_momentum\_max\_gev
+- gun\_theta\_min\_deg
+- gun\_theta\_max\_deg
+- gun\_phi\_min\_deg
+- gun\_phi\_max\_deg
+- gun\_distribution
+
+> ## `Exercise:`
+> Using combinations of the suggested tags, find the **latest** available dataset for:
+> - `K-` single particle gun simulations at a simulation level, i.e. not reconstructed.
+> - Determine the available momentum and angular ranges available for these files
+{: .challenge}
 
 ## Conclusion and Comments
 

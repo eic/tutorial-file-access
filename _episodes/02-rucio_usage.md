@@ -246,7 +246,9 @@ Most of the tags in this list are optional and may not be applied to all dataset
 - **geometry\_config**
 - **generator**
 
-Note that as mentioned for the generator, tags are entered in lower case, **with the exception of ion species**.
+This does not mean you are *required* to use these, rather that all datasets will have these tags.
+
+Note that tags are entered in lower case, **with the exception of ion species**.
 
 We can use these tags to filter through the available datasets and identify those of interest to us. For example:
 
