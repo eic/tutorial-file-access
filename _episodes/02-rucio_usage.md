@@ -15,7 +15,7 @@ keypoints:
 - "Once you find the file location with Rucio, you can use xrootd to download or stream it too"
 ---
 
-## Getting Started
+# Getting Started
 
 We can access and run the Rucio client from within eic-shell. From wherever you have eic-shell:
 
@@ -40,7 +40,7 @@ rucio -h
 
 To use Rucio further, we will need to briefly look at how Rucio organises data.
 
-## Datasets and DIDs
+# Datasets and DIDs
 
 Typically, we want to analyse data contained within specific files. Files can be grouped together into datasets which can themselves, be grouped into containers. All three refer to "data". As such, the term "data identifier` or **DID** is used in Rucio. A DID is just the name of a single file, dataset or container.
 
@@ -86,7 +86,7 @@ The `name` here - `/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10
 
 Other names may not necessarily contain all of the same information, but as a bare minimum, are likely to tell us something about the physics process simulated and beam conditions, as well as which software release was used. This is reflected in the metadata tags assigned as we will see later.
 
-## Finding DIDs
+# Finding DIDs
 
 Now that we know what a DID looks like, how can we find the DID corresponding to the file or dataset that we're interested in?
 
@@ -182,7 +182,7 @@ The `root://dtn-eic.jlab.org` at the start of the output tells us that this part
 
 So, we can find DIDs, check what they are and what they contain. To get to this point though, we needed some pre-knowledge of what the DID looked like which isn't necessarily that helpful for finding something. However, a much easier approach to finding what we need is to use the metadata tags that are assigned all DIDs from March 2026 onwards.
 
-## Metadata Tags
+# Metadata Tags
 
 The following tags are available as of March 2026:
 
@@ -278,7 +278,7 @@ which will return only datasets with 10x250 collisions (10 GeV electrons on 250 
 > **Hint** - Check the example name we looked at when introducing DIDs in a previous section.
 {: .challenge}
 
-## Using DIDs - Downloading or Processing Files
+# Using DIDs - Downloading or Processing Files
 
 So far we've seen how we can find DIDs and check some basic info such as what type of data they point to and where that data is stored. We generally want to do a bit more than that though. Typically we want to find data to *use* it in some way. For our simulation data, this is usually to analyse it! 
 
@@ -336,7 +336,7 @@ file_path = "root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_
 file = ROOT.TFile.Open(file_path, "READ")
 ```
 
-### Testing File Streaming
+## Testing File Streaming
 
 We can quickly check the three methods above work.
 

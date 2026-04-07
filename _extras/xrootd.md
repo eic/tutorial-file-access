@@ -62,7 +62,7 @@ In our earlier episode, we used this command to copy a file we found using Rucio
 
 It is also possible to open a file directly in ROOT if you have XrootD installed too. Note that the following command should be executed after opening root and `TFile::Open()` should be used:
 
-```bash
+```c++
 auto f = TFile::Open("root://dtn-eic.jlab.org//volatile/eic/EPIC/RECO/path-to-file")
 ```
 

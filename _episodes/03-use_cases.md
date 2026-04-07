@@ -15,7 +15,7 @@ keypoints:
 
 In this episode, we will explore a few common use cases and how users may want to interact with simulation campaign output in each case. Examples of carrying out some common tasks associated with each use case will be included.
 
-## Physics Analyser - Novice
+# Physics Analyser - Novice
 
 This use case explores a user new to analysing ePIC data to try and look at a specific physics process. They will likely want to find and identify a specific physics process to pass through their analysis code. Their requirements are likely to include:
 
@@ -76,7 +76,7 @@ where `FILEPATH` is the path to one specific file from the output of one of the 
 > - Download **one** file from this dataset of your choice
 {: .challenge}
 
-## Physics Analyser - Experienced
+# Physics Analyser - Experienced
 
 In this use case, we consider an experienced physics analyser that has a well developed analysis script that they want to run on a large number of files, possibly even a full dataset, for a specific physics process they're interested in. Their requirements are likely to include:
 
@@ -180,7 +180,7 @@ Note that we have restricted these examples to only print out the first five fil
 > 3. Stream **five** of the files in this dataset in a script, check the total number of events contained in all five files.
 {: .challenge}
 
-## Detector Designer/Optimiser, Algorithm/Reconstruction Development
+# Detector Designer/Optimiser, Algorithm/Reconstruction Development
 
 In this use case, someone updating the design of a detector in DD4HEP, or adjusting a reconstruction algorithm for a detector, may not want full reconstructed data. Instead, they may want more raw, hit level information. They may also want a specific detector configuration for comparison. In terms of physics process, they may not be looking at an actual reaction at all, but a particle gun simulation. To summarise, they may want:
 
@@ -212,7 +212,7 @@ Some tags they might use to find their data include:
 > - Do non-reconstructed files exist for this/these dataset(s)?
 {: .challenge}
 
-## Conclusion and Comments
+# Conclusion and Comments
 
 That wraps up our introduction to using Rucio and some example use cases and scenarios.
 
