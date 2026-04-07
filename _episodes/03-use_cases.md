@@ -182,7 +182,15 @@ Note that we have restricted these examples to only print out the first five fil
 
 ## Detector Designer/Optimiser, Algorithm/Reconstruction Development
 
-In this use case, someone updating the design of a detector in DD4HEP, or adjusting a reconstruction algorithm for a detector, may not want full reconstructed data. Instead, they may want more raw, hit level information. They may also want a specific detector configuration for comparison. In terms of physics process, they may not be looking at an actual reaction at all, but a particle gun simulation. Some tags they might use to find their data include:
+In this use case, someone updating the design of a detector in DD4HEP, or adjusting a reconstruction algorithm for a detector, may not want full reconstructed data. Instead, they may want more raw, hit level information. They may also want a specific detector configuration for comparison. In terms of physics process, they may not be looking at an actual reaction at all, but a particle gun simulation. To summarise, they may want:
+
+- Simulated (FULL) as well as reconstructed output files (RECO)
+- Particle gun studies with specific single particles
+  - Specific momentum or angular ranges
+- Different versions of a dataset to track changes between software releases
+- Specific geometry files in use for the simulation
+
+Some tags they might use to find their data include:
 
 - software\_release
 - data\_level
