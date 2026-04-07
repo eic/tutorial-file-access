@@ -198,9 +198,10 @@ In this use case, someone updating the design of a detector in DD4HEP, or adjust
 - gun\_distribution
 
 > ## `Exercise:`
-> Using combinations of the suggested tags, find the **latest** available dataset for:
-> - `K-` single particle gun simulations at a simulation level, i.e. not reconstructed.
-> - Determine the available momentum and angular ranges available for these files
+> Using combinations of the suggested tags, find the **latest** available dataset(s) for:
+> - `K-` single particle gun simulations
+> - Determine the available momentum and angular ranges available for this/these dataset(s)
+> - Do non-reconstructed files exist for this/these dataset(s)?
 {: .challenge}
 
 ## Conclusion and Comments
