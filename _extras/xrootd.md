@@ -10,14 +10,14 @@ In the tutorial, we used XrootD to copy files and to stream files. We could also
 
 Unlike Rucio, if we use XrootD, we *do* have a file structure. Typically, file paths typically look like:
 
-- /volatile/eic/EPIC/OUTPUT_TYPE/CAMPAGIN/DETECTOR_GEOMETRY/PHYSICS_PROCESS_TYPE/PHYSICS_PROCESS/BEAM_ENERGY/OTHER_CONDITIONS/FILE.eicrecon.edm4eic.root
-  - OUTPUT_TYPE - Is this event generator, simulation or reconstruction output?
-  - CAMPAIGN - Which simulation campaign is this from?
-  - DETECTOR_GEOMETRY - Which detector geometry/design was used to run this simulation?
-  - PHYSICS_PROCESS_TYPE - Broadly, what category of physics process is this?
-  - PHYSICS_PROCESS - What physics process is this?
-  - BEAM_ENERGY - What beam energy combination was used?
-  - OTHER_CONDITIONS - Other simulation conditions, such as a range for a specific kinematic variable (Q2, t or similar)
+- /volatile/eic/EPIC/<span style="color:#1845fb">OUTPUT_TYPE</span>/<span style="color:#ff5e02">CAMPAGIN</span>/<span style="color:#c91f16">DETECTOR_GEOMETRY</span>/<span style="color:#c849a9">PHYSICS_PROCESS_TYPE<\span>/<span style="color:#adad7d">PHYSICS_PROCESS</span>/<span style="color:#86c8dd">BEAM_ENERGY</span>/<span style="color:#578dff">OTHER_CONDITIONS</span> /FILE.eicrecon.edm4eic.root
+  - <span style="color:#1845fb">OUTPUT_TYPE</span>  - Is this event generator, simulation or reconstruction output?
+  - <span style="color:#ff5e02">CAMPAIGN</span>  - Which simulation campaign is this from?
+  - <span style="color:#c91f16">DETECTOR_GEOMETRY</span>  - Which detector geometry/design was used to run this simulation?
+  - <span style="color:#c849a9">PHYSICS_PROCESS_TYPE</span>  - Broadly, what category of physics process is this?
+  - <span style="color:#adad7d">PHYSICS_PROCESS</span>  - What physics process is this?
+  - <span style="color:#86c8dd">BEAM_ENERGY</span>  - What beam energy combination was used?
+  - <span style="color:#578dff">OTHER_CONDITIONS</span>  - Other simulation conditions, such as a range for a specific kinematic variable (Q2, t or similar)
 
 Some directories may include event generator versions after the physics process too. You may also find some examples where there are multiple sets of additional conditions.
 
