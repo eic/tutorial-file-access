@@ -184,6 +184,12 @@ So, we can find DIDs, check what they are and what they contain. To get to this 
 
 # Metadata Tags
 
+> ## Thanks!
+>
+> Automatically adding these metadata tags to datasets was enabled due to work by Sakib Raman (BNL), Anil Panta (JLab) and ePIC Software & Computing. Thanks to their efforts, finding ePIC data using Rucio is more straightforward!
+>
+{: .callout}
+
 The following tags are available as of March 2026:
 
 - **software\_release**
