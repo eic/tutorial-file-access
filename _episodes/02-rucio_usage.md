@@ -189,7 +189,8 @@ The following tags are available as of March 2026:
 - **software\_release**
   - Software release used in the simulation. Written as a container version tag/simulation campaign naming:
   - **YY**.**MM**.**v**
-  - E.g. 25.06.2-stable -> June 2025 software container, version 2
+  - E.g. 25.06.2-stable -> June 2025 software container, version 2 stable
+    - Note, campaign release files will almost always be from a **-stable** release/container version
 - **is\_background\_mixed**
   - True/false depending upon whether sample includes any background mixing
 - **data\_level**
@@ -269,6 +270,14 @@ rucio did list --filter 'electron_beam_energy_gev==10, ion_beam_energy_gev==250'
 ```
 
 which will return only datasets with 10x250 collisions (10 GeV electrons on 250 GeV ions using the standard ePIC conventions). We can keep adding filters in this manner as we like to really narrow down the DIDs we return with our query.
+
+Note that we can also use wildcards in our tag searches. This could be helpful if we don't know if a particular dataset was run in a specific campaign for example. We could do:
+
+```bash
+rucio did list --filter 'software_release=26.*, electron_beam_energy_gev==10' 'epic:*'
+```
+
+to just get a list of all DIDs with 10 GeV beam electrons from 2026 software releases for example. **However, remember that tags have only been applied from March 2026 onwards.**
 
 > ## `Exercise:`
 > Using tags, find the DIDs of the **latest**:
