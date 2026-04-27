@@ -245,6 +245,10 @@ The following tags are available as of March 2026:
   - Type of distribution for particle gun
     - `uniform`, `cos(theta)`, `eta`, `pseudorapidity`, `ffbar`
 
+> ## `Reference Sheet:` 
+> This information is available segmented out from this tutorial as a "Reference Sheet" in the extras section by following the [Rucio Metadata Tags]({{ page.root }}{% link _extras/metadata-tags.md}) link.
+{: .callout}
+
 Most of the tags in this list are optional and may not be applied to all datasets. However, the following tags are **required** for all datasets:
 
 - **software\_release**
