@@ -58,3 +58,5 @@ The following tags are available as of March 2026:
 - **gun\_distribution**
   - Type of distribution for particle gun
     - `uniform`, `cos(theta)`, `eta`, `pseudorapidity`, `ffbar`
+
+{% include links.md %}

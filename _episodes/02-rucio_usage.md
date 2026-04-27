@@ -247,7 +247,7 @@ The following tags are available as of March 2026:
 
 > ## Reference Sheet
 >
-> This information is available segmented out from this tutorial as a reference sheet in the extras section by following the [Rucio Metadata Tags]({{ page.root }}{% link _extras/metadata_tags.md}) link.
+> This information is available segmented out from this tutorial as a reference sheet in the extras section by following the [Rucio Metadata Tags]({{ page.root }}{% link _extras/metadata_tags.md %}) link.
 >
 {: .callout}
 
