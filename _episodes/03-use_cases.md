@@ -89,7 +89,7 @@ In this use case, we consider an experienced physics analyser that has a well de
 To find files that meet their requirements they could utilise the following tags:
 
 - software\_release
-- physics\_process
+- requester\_pwg
 - electron\_beam\_energy\_gev
 - ion\_beam\_energy\_gev
 - generator
