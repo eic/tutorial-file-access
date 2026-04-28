@@ -19,7 +19,7 @@ The following tags are available as of March 2026:
   - Geometry config tag, e.g. `craterlake_18x275`, `craterlake_5x41_He3`
 - **generator**
   - MC event generator used to generate the simulated data
-    - `pythia6`, `pythia8`, `beagle`, `djangoh`, `rapgap`, `dempgen`, `sartre`, `lager`, `estarlight`, `eic_sr_geant4`, `eic_esr_xsuite`, `sherpa`, `single_particle`, `other` 
+    - `pythia6`, `pythia8`, `beagle`, `djangoh`, `rapgap`, `dempgen`, `sartre`, `lager`, `estarlight`, `eic_sr_geant4`, `eic_esr_xsuite`, `sherpa`, `single_particle`, `epic`, `other` 
 - **requester\_pwg**
   - Defines the physics working group (PWG) that the simulated data relates to, options are:
     - `edt` (exclusive, diffractive and tagging), `inclusive`, `jets_hf`, `semi_inclusive`, `ew_bsm`, `other`
