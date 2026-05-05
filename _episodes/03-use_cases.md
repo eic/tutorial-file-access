@@ -45,7 +45,7 @@ Where we can substitute in our chosen values for each in place of `XXX`, `YYY`, 
 
 > ## `Beam Energies:` 
 > Whilst we can enter any number for the `electron_beam_energy_gev` and `ion_beam_energy_gev` values, there are only certain combinations actually in use.
-> `electron_beam_energy_gev` is typically 5, 10 or 18 GeV
+> `electron_beam_energy_gev` is typically 5, 9, 10 or 18 GeV
 > `ion_beam_energy_gev` is typically 41, 100, 130, 250 or 275 GeV for protons.
 > For other ion species, 110 and 166 may also be used.
 {: .callout}
@@ -97,7 +97,7 @@ To find files that meet their requirements they could utilise the following tags
 
 They may also want to use the `q2_min_gev2` ad `q2_max_gev2` tags, along with the `ion_species` tags to narrow down to an even more specific subset of files. They may also want to analyse files with or without background enabled.
 
-As they want to process a large number of files, **it is unlikely (and not recommended) that they download a large number of files to process them locally**. Instead, they may want to stream their files directly in their analysis script. They could do this via:
+As they want to process a large number of files, **it is unlikely (and not recommended) that they will want to download a large number of files to process them locally**. Instead, they may want to stream their files directly in their analysis script. They could do this via:
 
 ```c++
 auto f = TFile::Open("FILEPATH");
@@ -178,6 +178,8 @@ Note that we have restricted these examples to only print out the first five fil
 > 1. Stream **one** file from this dataset in a script, check the number of events in this file
 > 2. Print **all** of the files in this dataset to a text file
 > 3. Stream **five** of the files in this dataset in a script, check the total number of events contained in all five files.
+>
+> *Hint* - See the example scripts in the last episode for how to get the number of events in a root file in a few different ways.
 {: .challenge}
 
 # Detector Designer/Optimiser, Algorithm/Reconstruction Development
