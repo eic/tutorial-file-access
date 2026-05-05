@@ -23,7 +23,7 @@ We can access and run the Rucio client from within eic-shell. From wherever you 
 ./eic-shell
 rucio whoami
 ```
-This should print out some information -
+This should print out some information:
 
 ```bash
 email      : eicprod@jlab.org
@@ -149,7 +149,7 @@ e.g.
 rucio did content list epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
 ```
 
-Again, a lot of output. We see though that this DID is for a dataset of a large number of files. We can again us `--short` to just get this as a list:
+Again, a lot of output. We see though that this DID is for a dataset of a large number of files. We can again use `--short` to just get this as a list:
 
 ```bash
 rucio did content list --short epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
@@ -167,7 +167,7 @@ rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/2
 > ```bash
 > rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
 > ```
-> You could pope this to a file for later usage. However, note that replicas may exist for a given file. Both would be printed by this command as is. You can check if multiple copies exist via:
+> You could pipe this to a file for later usage. However, note that replicas may exist for a given file. Both would be printed by this command as is. You can check if multiple copies exist via:
 > ```bash
 > rucio rule list --did scope:name
 > ```
@@ -282,6 +282,12 @@ rucio did list --filter 'electron_beam_energy_gev==10, ion_beam_energy_gev==250'
 ```
 
 which will return only datasets with 10x250 collisions (10 GeV electrons on 250 GeV ions using the standard ePIC conventions). We can keep adding filters in this manner as we like to really narrow down the DIDs we return with our query.
+
+> ## Logical Expressions
+>
+> Note that in our examples we use `==` with our filters, but other logical expressions can be used too. E.g. `>=`, `<=`, `>`, `<` and so on are all valid for tags expecting an integer/number value.
+>
+{: .callout}
 
 Note that we can also use wildcards in our tag searches. This could be helpful if we don't know if a particular dataset was run in a specific campaign for example. We could do:
 
