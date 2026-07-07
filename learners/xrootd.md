@@ -6,7 +6,7 @@ title: "xrootd"
 
 In the tutorial, we used XrootD to copy files and to stream files. We could also use it to search for files as well if we wanted. However, the limitation is that typically when browsing we must specify a server. If our file isn't on this server, we won't see it, unlike in Rucio.
 
-# Directory Structure
+## Directory Structure
 
 Unlike Rucio, if we use XrootD, we *do* have a file structure. Typically, file paths typically look like:
 
@@ -21,13 +21,17 @@ Unlike Rucio, if we use XrootD, we *do* have a file structure. Typically, file p
 
 Some directories may include event generator versions after the physics process too. You may also find some examples where there are multiple sets of additional conditions.
 
-> ## `Warning - Non-JLab Servers`
-> Notice the `/volatile/` at the front of the path. This is specific to files on the JLab XrootD server.
->
-> Files stored elsewhere may just be under `/eic/EPIC/...`
-{: .caution}
+::::::::::::::::::::::::::::::::::::::::::::: callout
 
-# Browsing the Simulation Output with XrootD
+## Warning - Non-JLab Servers
+
+Notice the `/volatile/` at the front of the path. This is specific to files on the JLab XrootD server.
+
+Files stored elsewhere may just be under `/eic/EPIC/...`
+
+:::::::::::::::::::::::::::::::::::::::::::::
+
+## Browsing the Simulation Output with XrootD
 
 We can browse the simulation output using XrootD from within the eic-shell. To browse the directory structure and exit, one can run the commands:
 
@@ -38,7 +42,7 @@ ls /volatile/eic/EPIC/RECO/26.02.0
 exit
 ```
 
-`xrdfs` is the command to log in to a specific server, in this case `root://dtn-eic.jlab.org`. 
+`xrdfs` is the command to log in to a specific server, in this case `root://dtn-eic.jlab.org`.
 
 When calling ls, we should see everything in this subfolder. In this case, all files from the **February 2026** campaign.
 
@@ -58,7 +62,7 @@ In our earlier episode, we used this command to copy a file we found using Rucio
 1. Find file location with Rucio
 2. Stream or download with XrootD
 
-# Streaming Files
+## Streaming Files
 
 It is also possible to open a file directly in ROOT if you have XrootD installed too. Note that the following command should be executed after opening root and `TFile::Open()` should be used:
 
@@ -83,5 +87,3 @@ import XRootD
 file_path = "root://dtn-eic.jlab.org//volatile/eic/EPIC/RECO/path-to-file"
 file = ROOT.TFile.Open(file_path, "READ")
 ```
-
-{% include links.md %}

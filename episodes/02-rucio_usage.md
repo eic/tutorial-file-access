@@ -2,20 +2,23 @@
 title: "Rucio Usage"
 teaching: 15
 exercises: 15
-questions:
-- "How can I use Rucio?"
-objectives:
-- "Become familiar with aspects of Rucio"
-- "Use Rucio tags to find specific types of files"
-- "Learn how to download or stream files for further use"
-keypoints:
-- "Rucio works with datasets and Data Identifiers (DIDs)"
-- "ePIC DIDs may look or be formatted like a nested filepath, but they are flat"
-- "Tags can be used to quickly sort and find data of interest"
-- "Once you find the file location with Rucio, you can use xrootd to download or stream it too"
 ---
 
-# Getting Started
+::::::::::::::::::::::::::::::::::::::::::::: questions
+
+- How can I use Rucio?
+
+:::::::::::::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::: objectives
+
+- Become familiar with aspects of Rucio
+- Use Rucio tags to find specific types of files
+- Learn how to download or stream files for further use
+
+:::::::::::::::::::::::::::::::::::::::::::::
+
+## Getting Started
 
 We can access and run the Rucio client from within eic-shell. From wherever you have eic-shell:
 
@@ -25,7 +28,7 @@ rucio whoami
 ```
 This should print out some information:
 
-```bash
+```output
 email      : eicprod@jlab.org
 account    : eicread
 account_type : GROUP
@@ -40,13 +43,13 @@ rucio -h
 
 To use Rucio further, we will need to briefly look at how Rucio organises data.
 
-# Datasets and DIDs
+## Datasets and DIDs
 
-Typically, we want to analyse data contained within specific files. Files can be grouped together into datasets which can themselves, be grouped into containers. All three refer to "data". As such, the term "data identifier` or **DID** is used in Rucio. A DID is just the name of a single file, dataset or container.
+Typically, we want to analyse data contained within specific files. Files can be grouped together into datasets which can themselves, be grouped into containers. All three refer to "data". As such, the term "data identifier" or **DID** is used in Rucio. A DID is just the name of a single file, dataset or container.
 
 In Rucio, all DIDs follow a naming scheme which is composed of two strings - a **scope** and a **name**, formatted as:
 
-``scope:name``
+`scope:name`
 
 For epic, the scope is always `epic`, meaning that __all__ of our DIDs look like:
 
@@ -62,11 +65,11 @@ The `name` here - `/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10
 
 - `RECO`
   - This tells us that the DID contains reconstructed output file information
-- `26.02.0` 
+- `26.02.0`
   - This tells us that the `26.02.0` software release was used, the February 2026 release (version 0).
 - `epic_craterlake`
   - This tells us that the `epic_craterlake` detector configuration was used in the simulation
-- `EXCLSUIVE`
+- `EXCLUSIVE`
   - The DID is for a dataset of exclusive physics events
 - `DEMP`
   - This is the specific exclusive process simulated in the dataset, **D**eeply **E**xclusive **M**eson **P**roduction, DEMP
@@ -80,13 +83,17 @@ The `name` here - `/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10
 - `pi+`
   - Pi+ are generated in this output - this is specific to this DEMP reaction and signifies that it is Deeply Exclusive Pion Production
 
-> ## `Warning - Not a filepath!`
-> The `name` of our DID here looks a lot like a filepath, however it is a flat object and does **not** have any hierarchy as we will see in the next section.
-{: .caution}
+::::::::::::::::::::::::::::::::::::::::::::: callout
+
+## Warning - Not a filepath!
+
+The `name` of our DID here looks a lot like a filepath, however it is a flat object and does **not** have any hierarchy as we will see in the next section.
+
+:::::::::::::::::::::::::::::::::::::::::::::
 
 Other names may not necessarily contain all of the same information, but as a bare minimum, are likely to tell us something about the physics process simulated and beam conditions, as well as which software release was used. This is reflected in the metadata tags assigned as we will see later.
 
-# Finding DIDs
+## Finding DIDs
 
 Now that we know what a DID looks like, how can we find the DID corresponding to the file or dataset that we're interested in?
 
@@ -110,10 +117,14 @@ rucio did list epic:/RECO/\*
 
 We get an enormous number of DIDs returned! This is every reconstruction related DID available to access right now.
 
-> ## `Warning - Check the campaign date!`
->  If you encounter any issues when processing the DID listed earlier, it may be due to the software release version.
->  Remember that campaigns older than ~6 months will not be instantly accessible. Try switching to a more recent campaign version.
-{: .caution}
+::::::::::::::::::::::::::::::::::::::::::::: callout
+
+## Warning - Check the campaign date!
+
+If you encounter any issues when processing the DID listed earlier, it may be due to the software release version.
+Remember that campaigns older than ~6 months will not be instantly accessible. Try switching to a more recent campaign version.
+
+:::::::::::::::::::::::::::::::::::::::::::::
 
 Working backwards from the full DID we had earlier, we could combine in the software release, detector configuration, process and generator to narrow down the list of DIDs:
 
@@ -131,11 +142,15 @@ rucio did list epic:*RECO*26.02.0*DEMP*
 
 But as above, this does require some knowledge of what our DID looks like to begin with.
 
-> ## `Pin for later:` 
-> If we used `--short` as suggested to just get a list of DIDs, we could pipe this output to a file.
->
-> Each line would be the full DID for an item which we could potentially make use of.
-{: .callout}
+::::::::::::::::::::::::::::::::::::::::::::: callout
+
+## Pin for later
+
+If we used `--short` as suggested to just get a list of DIDs, we could pipe this output to a file.
+
+Each line would be the full DID for an item which we could potentially make use of.
+
+:::::::::::::::::::::::::::::::::::::::::::::
 
 As we can see, the DIDs we have in our list now are all datasets. We can check the contents of these datasets too. Let's pick one of our DIDs and examine the content. We can do this via:
 
@@ -161,34 +176,40 @@ We can check where a specific file in our dataset is stored too:
 rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root
 ```
 
-> ## `list file comment:` 
-> Despite the slightly misleading command above, we can actually just provide a dataset DID here too. If we do so, we will get the location of all files in the dataset in one command, e.g:
->
-> ```bash
-> rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
-> ```
-> You could pipe this to a file for later usage. However, note that replicas may exist for a given file. Both would be printed by this command as is. You can check if multiple copies exist via:
-> ```bash
-> rucio rule list --did scope:name
-> ```
-> e.g.
-> ```bash
-> rucio rule list --did epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
-> ```
-> This will list where the DID is stored and how many copies exist.
-{: .callout}
+::::::::::::::::::::::::::::::::::::::::::::: callout
+
+## list file comment
+
+Despite the slightly misleading command above, we can actually just provide a dataset DID here too. If we do so, we will get the location of all files in the dataset in one command, e.g:
+
+```bash
+rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
+```
+You could pipe this to a file for later usage. However, note that replicas may exist for a given file. Both would be printed by this command as is. You can check if multiple copies exist via:
+```bash
+rucio rule list --did scope:name
+```
+e.g.
+```bash
+rucio rule list --did epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
+```
+This will list where the DID is stored and how many copies exist.
+
+:::::::::::::::::::::::::::::::::::::::::::::
 
 The `root://dtn-eic.jlab.org` at the start of the output tells us that this particular file is stored on JLab servers. As mentioned in the outset, Rucio works across multiple sites easily, however, methods which we might use to stream files do not. **As such, being able to check where our files are stored is a useful feature.**
 
 So, we can find DIDs, check what they are and what they contain. To get to this point though, we needed some pre-knowledge of what the DID looked like which isn't necessarily that helpful for finding something. However, a much easier approach to finding what we need is to use the metadata tags that are assigned all DIDs from March 2026 onwards.
 
-# Metadata Tags
+## Metadata Tags
 
-> ## Thanks!
->
-> Automatically adding these metadata tags to datasets was enabled due to work by Sakib Rahman (BNL), Anil Panta (JLab) and ePIC Software & Computing. Thanks to their efforts, finding ePIC data using Rucio is more straightforward!
->
-{: .callout}
+::::::::::::::::::::::::::::::::::::::::::::: callout
+
+## Thanks!
+
+Automatically adding these metadata tags to datasets was enabled due to work by Sakib Rahman (BNL), Anil Panta (JLab) and ePIC Software & Computing. Thanks to their efforts, finding ePIC data using Rucio is more straightforward!
+
+:::::::::::::::::::::::::::::::::::::::::::::
 
 The following tags are available as of March 2026:
 
@@ -205,7 +226,7 @@ The following tags are available as of March 2026:
   - Geometry config tag, e.g. `craterlake_18x275`, `craterlake_5x41_He3`
 - **generator**
   - MC event generator used to generate the simulated data
-    - `pythia6`, `pythia8`, `beagle`, `djangoh`, `rapgap`, `dempgen`, `sartre`, `lager`, `estarlight`, `eic_sr_geant4`, `eic_esr_xsuite`, `sherpa`, `single_particle`, `epic`, `other` 
+    - `pythia6`, `pythia8`, `beagle`, `djangoh`, `rapgap`, `dempgen`, `sartre`, `lager`, `estarlight`, `eic_sr_geant4`, `eic_esr_xsuite`, `sherpa`, `single_particle`, `epic`, `other`
 - **requester\_pwg**
   - Defines the physics working group (PWG) that the simulated data relates to, options are:
     - `edt` (exclusive, diffractive and tagging), `inclusive`, `jets_hf`, `semi_inclusive`, `ew_bsm`, `other`
@@ -224,7 +245,7 @@ The following tags are available as of March 2026:
     - `p`, `Au197`, `Cu63`, `He3`, `H2`, `Ru96`
 - **q2\_min\_gev2**
   - Minimum Q2 value (GeV^2) in the simulation file, entered as a number.
-- **q2\_max_gev2**
+- **q2\_max\_gev2**
   - Maximum Q2 value (GeV^2) in the simulation file, entered as a number.
 - **gun\_particle**
   - Single particle type
@@ -245,11 +266,13 @@ The following tags are available as of March 2026:
   - Type of distribution for particle gun
     - `uniform`, `cos(theta)`, `eta`, `pseudorapidity`, `ffbar`
 
-> ## Reference Sheet
->
-> This information is available segmented out from this tutorial as a reference sheet in the extras section by following the [Rucio Metadata Tags]({{ page.root }}{% link _extras/metadata_tags.md %}) link.
->
-{: .callout}
+::::::::::::::::::::::::::::::::::::::::::::: callout
+
+## Reference Sheet
+
+This information is available segmented out from this tutorial as a reference sheet in the extras section by following the [Rucio Metadata Tags](../learners/metadata-tags.md) link.
+
+:::::::::::::::::::::::::::::::::::::::::::::
 
 Most of the tags in this list are optional and may not be applied to all datasets. However, the following tags are **required** for all datasets:
 
@@ -283,11 +306,13 @@ rucio did list --filter 'electron_beam_energy_gev==10, ion_beam_energy_gev==250'
 
 which will return only datasets with 10x250 collisions (10 GeV electrons on 250 GeV ions using the standard ePIC conventions). We can keep adding filters in this manner as we like to really narrow down the DIDs we return with our query.
 
-> ## Logical Expressions
->
-> Note that in our examples we use `==` with our filters, but other logical expressions can be used too. E.g. `>=`, `<=`, `>`, `<` and so on are all valid for tags expecting an integer/number value.
->
-{: .callout}
+::::::::::::::::::::::::::::::::::::::::::::: callout
+
+## Logical Expressions
+
+Note that in our examples we use `==` with our filters, but other logical expressions can be used too. E.g. `>=`, `<=`, `>`, `<` and so on are all valid for tags expecting an integer/number value.
+
+:::::::::::::::::::::::::::::::::::::::::::::
 
 Note that we can also use wildcards in our tag searches. This could be helpful if we don't know if a particular dataset was run in a specific campaign for example. We could do:
 
@@ -297,17 +322,38 @@ rucio did list --filter 'software_release=26.*, electron_beam_energy_gev==10' 'e
 
 to just get a list of all DIDs with 10 GeV beam electrons from 2026 software releases for example. **However, remember that tags have only been applied from March 2026 onwards.**
 
-> ## `Exercise:`
-> Using tags, find the DIDs of the **latest**:
-> - DEMP events in the Q2 range of 3 to 10 for 10 GeV electrons on 250 GeV protons
-> - Print the full DID and check the number of files in the dataset
->
-> **Hint** - Check the example name we looked at when introducing DIDs in a previous section.
-{: .challenge}
+::::::::::::::::::::::::::::::::::::::::::::: challenge
 
-# Using DIDs - Downloading or Processing Files
+## Exercise
 
-So far we've seen how we can find DIDs and check some basic info such as what type of data they point to and where that data is stored. We generally want to do a bit more than that though. Typically we want to find data to *use* it in some way. For our simulation data, this is usually to analyse it! 
+Using tags, find the DIDs of the **latest**:
+
+- DEMP events in the Q2 range of 3 to 10 for 10 GeV electrons on 250 GeV protons
+- Print the full DID and check the number of files in the dataset
+
+**Hint** - Check the example name we looked at when introducing DIDs in a previous section.
+
+::::::::::::::: solution
+
+Combine the relevant tags in a single filtered `did list`, using the most recent `software_release`
+you find available, for example:
+
+```bash
+rucio did list --short --filter 'software_release=26.*, generator==dempgen, electron_beam_energy_gev==10, ion_beam_energy_gev==250, q2_min_gev2==3, q2_max_gev2==10' 'epic:*'
+```
+
+This should return the matching DEMP dataset DID (of the form
+`epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+`). Feed that DID
+into `rucio did content list --short scope:name` and count the returned lines to get the number of
+files in the dataset.
+
+:::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::::::::
+
+## Using DIDs - Downloading or Processing Files
+
+So far we've seen how we can find DIDs and check some basic info such as what type of data they point to and where that data is stored. We generally want to do a bit more than that though. Typically we want to find data to *use* it in some way. For our simulation data, this is usually to analyse it!
 
 We can download DIDs, containers, datasets or files, straightforwardly:
 
@@ -323,15 +369,19 @@ rucio download epic:/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/1
 
 By default it will download to our current directory with its original name. In this case, that's unfortunate because as we noticed earlier, this looks a lot like a UNIX file path. As such, we now have a large number of nested directories to go through before we get to our file!
 
-> ## `Warning - Do you need the whole dataset?`
-> Think very carefully before downloading a DID. What is it? If it's a full dataset, do you **really** need all of the data?
->
-> Generally you will not need a local copy of a full dataset. It's generally best to only download a small subset of files to test and run.
->
-> We can *stream* files from a full dataset rather than downloading them as we'll see in a moment.
-{: .caution}
+::::::::::::::::::::::::::::::::::::::::::::: callout
 
-It might actually be easier to use [XrootD]({{ page.root }}{% link _extras/xrootd.md %}) to grab our file as it's a bit more intuitive, we do need our location from earlier for this though:
+## Warning - Do you need the whole dataset?
+
+Think very carefully before downloading a DID. What is it? If it's a full dataset, do you **really** need all of the data?
+
+Generally you will not need a local copy of a full dataset. It's generally best to only download a small subset of files to test and run.
+
+We can *stream* files from a full dataset rather than downloading them as we'll see in a moment.
+
+:::::::::::::::::::::::::::::::::::::::::::::
+
+It might actually be easier to use [XrootD](../learners/xrootd.md) to grab our file as it's a bit more intuitive, we do need our location from earlier for this though:
 
 ```bash
 xrdcp root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root ./
@@ -363,7 +413,7 @@ file_path = "root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_
 file = ROOT.TFile.Open(file_path, "READ")
 ```
 
-## Testing File Streaming
+### Testing File Streaming
 
 We can quickly check the three methods above work.
 
@@ -388,7 +438,6 @@ import XRootD
 file_path = "root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root"
 root_file = uproot.open(file_path)
 print(root_file['events'].num_entries, "events in this tree.")
-
 ```
 or directly using PyRoot:
 
@@ -400,4 +449,13 @@ file = ROOT.TFile.Open(file_path, "READ")
 print((file.Get("events")).GetEntries(), "events in this tree.")
 ```
 
-All three approaches should yield the same result. 
+All three approaches should yield the same result.
+
+::::::::::::::::::::::::::::::::::::::::::::: keypoints
+
+- Rucio works with datasets and Data Identifiers (DIDs)
+- ePIC DIDs may look or be formatted like a nested filepath, but they are flat
+- Tags can be used to quickly sort and find data of interest
+- Once you find the file location with Rucio, you can use xrootd to download or stream it too
+
+:::::::::::::::::::::::::::::::::::::::::::::

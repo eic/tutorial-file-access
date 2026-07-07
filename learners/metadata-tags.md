@@ -19,7 +19,7 @@ The following tags are available as of March 2026:
   - Geometry config tag, e.g. `craterlake_18x275`, `craterlake_5x41_He3`
 - **generator**
   - MC event generator used to generate the simulated data
-    - `pythia6`, `pythia8`, `beagle`, `djangoh`, `rapgap`, `dempgen`, `sartre`, `lager`, `estarlight`, `eic_sr_geant4`, `eic_esr_xsuite`, `sherpa`, `single_particle`, `epic`, `other` 
+    - `pythia6`, `pythia8`, `beagle`, `djangoh`, `rapgap`, `dempgen`, `sartre`, `lager`, `estarlight`, `eic_sr_geant4`, `eic_esr_xsuite`, `sherpa`, `single_particle`, `epic`, `other`
 - **requester\_pwg**
   - Defines the physics working group (PWG) that the simulated data relates to, options are:
     - `edt` (exclusive, diffractive and tagging), `inclusive`, `jets_hf`, `semi_inclusive`, `ew_bsm`, `other`
@@ -38,7 +38,7 @@ The following tags are available as of March 2026:
     - `p`, `Au197`, `Cu63`, `He3`, `H2`, `Ru96`
 - **q2\_min\_gev2**
   - Minimum Q2 value (GeV^2) in the simulation file, entered as a number.
-- **q2\_max_gev2**
+- **q2\_max\_gev2**
   - Maximum Q2 value (GeV^2) in the simulation file, entered as a number.
 - **gun\_particle**
   - Single particle type
@@ -58,5 +58,3 @@ The following tags are available as of March 2026:
 - **gun\_distribution**
   - Type of distribution for particle gun
     - `uniform`, `cos(theta)`, `eta`, `pseudorapidity`, `ffbar`
-
-{% include links.md %}
