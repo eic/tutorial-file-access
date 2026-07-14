@@ -139,7 +139,13 @@
     <loc>https://eic.github.io/tutorial-file-access/_layouts/workshop.html</loc>
   </url>
   <url>
+    <loc>https://eic.github.io/tutorial-file-access/aio.html</loc>
+  </url>
+  <url>
     <loc>https://eic.github.io/tutorial-file-access/citation.html</loc>
+  </url>
+  <url>
+    <loc>https://eic.github.io/tutorial-file-access/images.html</loc>
   </url>
   <url>
     <loc>https://eic.github.io/tutorial-file-access/index.html</loc>
@@ -163,10 +169,22 @@
     <loc>https://eic.github.io/tutorial-file-access/instructor/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://eic.github.io/tutorial-file-access/instructor/aio.html</loc>
+  </url>
+  <url>
     <loc>https://eic.github.io/tutorial-file-access/instructor/citation.html</loc>
   </url>
   <url>
+    <loc>https://eic.github.io/tutorial-file-access/instructor/images.html</loc>
+  </url>
+  <url>
     <loc>https://eic.github.io/tutorial-file-access/instructor/index.html</loc>
+  </url>
+  <url>
+    <loc>https://eic.github.io/tutorial-file-access/instructor/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://eic.github.io/tutorial-file-access/instructor/key-points.html</loc>
   </url>
   <url>
     <loc>https://eic.github.io/tutorial-file-access/instructor/metadata-tags.html</loc>
@@ -179,6 +197,12 @@
   </url>
   <url>
     <loc>https://eic.github.io/tutorial-file-access/instructor/xrootd.html</loc>
+  </url>
+  <url>
+    <loc>https://eic.github.io/tutorial-file-access/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://eic.github.io/tutorial-file-access/key-points.html</loc>
   </url>
   <url>
     <loc>https://eic.github.io/tutorial-file-access/metadata-tags.html</loc>
