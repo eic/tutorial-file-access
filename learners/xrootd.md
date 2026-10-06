@@ -38,20 +38,20 @@ We can browse the simulation output using XrootD from within the eic-shell. To b
 ```bash
 ./eic-shell
 xrdfs root://dtn2304.jlab.org:8443
-ls /jlab-osdf-ro/eic/EPIC/volatile/RECO/26.02.0
+ls /jlab-osdf-ro/eic/EPIC/volatile/RECO/26.03.0
 exit
 ```
 
 `xrdfs` is the command to log in to a specific server, in this case `root://dtn2304.jlab.org:8443`.
 
-When calling ls, we should see everything in this subfolder. In this case, all files from the **February 2026** campaign.
+When calling ls, we should see everything in this subfolder. In this case, all files from the **March 2026** campaign.
 
 Files can also be copied locally by replacing `ls` with `cp`.
 
 It is also possible to copy a file and open it locally using the `xrdcp` command:
 ```bash
 ./eic-shell
-xrdcp root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/26.02.0/path-to-file .
+xrdcp root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/26.03.0/path-to-file .
 exit
 ```
 
