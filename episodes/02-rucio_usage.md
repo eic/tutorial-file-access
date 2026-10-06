@@ -197,7 +197,7 @@ This will list where the DID is stored and how many copies exist.
 
 :::::::::::::::::::::::::::::::::::::::::::::
 
-The `root://dtn-eic.jlab.org` at the start of the output tells us that this particular file is stored on JLab servers. As mentioned in the outset, Rucio works across multiple sites easily, however, methods which we might use to stream files do not. **As such, being able to check where our files are stored is a useful feature.**
+The `root://dtn2304.jlab.org:8443` at the start of the output tells us that this particular file is stored on JLab servers. As mentioned in the outset, Rucio works across multiple sites easily, however, methods which we might use to stream files do not. **As such, being able to check where our files are stored is a useful feature.**
 
 So, we can find DIDs, check what they are and what they contain. To get to this point though, we needed some pre-knowledge of what the DID looked like which isn't necessarily that helpful for finding something. However, a much easier approach to finding what we need is to use the metadata tags that are assigned all DIDs from March 2026 onwards.
 
@@ -384,7 +384,7 @@ We can *stream* files from a full dataset rather than downloading them as we'll 
 It might actually be easier to use [XrootD](../learners/xrootd.md) to grab our file as it's a bit more intuitive, we do need our location from earlier for this though:
 
 ```bash
-xrdcp root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root ./
+xrdcp root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root ./
 ```
 
 Where `./` is our current directory, this time, we'll just get the actual file! We could also specify a new name if desired in place of just `./`.
@@ -392,7 +392,7 @@ Where `./` is our current directory, this time, we'll just get the actual file! 
 Our full path, including location, as used here, will also be useful if we want to stream our files directly in a script. In ROOT, we could just do:
 
 ```c++
-auto f = TFile::Open("root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root")
+auto f = TFile::Open("root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root")
 ```
 
 or using python and uproot:
@@ -400,7 +400,7 @@ or using python and uproot:
 ```python
 import uproot
 import XRootD
-file_path = "root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root"
+file_path = "root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root"
 root_file = uproot.open(file_path)
 ```
 
@@ -409,7 +409,7 @@ or directly with Pyroot:
 ```python
 import ROOT
 import XRootD
-file_path = "root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root"
+file_path = "root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root"
 file = ROOT.TFile.Open(file_path, "READ")
 ```
 
@@ -421,7 +421,7 @@ To test the ROOT approach, we can make a macro called `Test.C` and add:
 
 ```c++
 void Test(){
-  auto f = TFile::Open("root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root");
+  auto f = TFile::Open("root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root");
   auto tree = f->Get<TTree>("events");
   Long64_t nEntries = tree->GetEntries(); // read the number of entries in the tree
   cout << nEntries << " events in tree" << endl;
@@ -435,7 +435,7 @@ Similarly in Python, we can make `Test.py` and use Uproot:
 ```python
 import uproot
 import XRootD
-file_path = "root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root"
+file_path = "root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root"
 root_file = uproot.open(file_path)
 print(root_file['events'].num_entries, "events in this tree.")
 ```
@@ -444,7 +444,7 @@ or directly using PyRoot:
 ```python
 import ROOT
 import XRootD
-file_path = "root://dtn-eic.jlab.org:1094//volatile/eic/EPIC//RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root"
+file_path = "root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/26.02.0/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root"
 file = ROOT.TFile.Open(file_path, "READ")
 print((file.Get("events")).GetEntries(), "events in this tree.")
 ```

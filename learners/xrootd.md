@@ -10,7 +10,7 @@ In the tutorial, we used XrootD to copy files and to stream files. We could also
 
 Unlike Rucio, if we use XrootD, we *do* have a file structure. Typically, file paths typically look like:
 
-- /volatile/eic/EPIC/<span style="color:#1845fb">OUTPUT_TYPE</span>/<span style="color:#ff5e02">CAMPAGIN</span>/<span style="color:#c91f16">DETECTOR_GEOMETRY</span>/<span style="color:#c849a9">PHYSICS_PROCESS_TYPE</span>/<span style="color:#adad7d">PHYSICS_PROCESS</span>/<span style="color:#86c8dd">BEAM_ENERGY</span>/<span style="color:#578dff">OTHER_CONDITIONS</span>/FILE.eicrecon.edm4eic.root
+- /jlab-osdf-ro/eic/EPIC/volatile/<span style="color:#1845fb">OUTPUT_TYPE</span>/<span style="color:#ff5e02">CAMPAGIN</span>/<span style="color:#c91f16">DETECTOR_GEOMETRY</span>/<span style="color:#c849a9">PHYSICS_PROCESS_TYPE</span>/<span style="color:#adad7d">PHYSICS_PROCESS</span>/<span style="color:#86c8dd">BEAM_ENERGY</span>/<span style="color:#578dff">OTHER_CONDITIONS</span>/FILE.eicrecon.edm4eic.root
   - <span style="color:#1845fb">OUTPUT_TYPE</span>  - Is this event generator, simulation or reconstruction output?
   - <span style="color:#ff5e02">CAMPAIGN</span>  - Which simulation campaign is this from?
   - <span style="color:#c91f16">DETECTOR_GEOMETRY</span>  - Which detector geometry/design was used to run this simulation?
@@ -37,12 +37,12 @@ We can browse the simulation output using XrootD from within the eic-shell. To b
 
 ```bash
 ./eic-shell
-xrdfs root://dtn-eic.jlab.org
-ls /volatile/eic/EPIC/RECO/26.02.0
+xrdfs root://dtn2304.jlab.org:8443
+ls /jlab-osdf-ro/eic/EPIC/volatile/RECO/26.02.0
 exit
 ```
 
-`xrdfs` is the command to log in to a specific server, in this case `root://dtn-eic.jlab.org`.
+`xrdfs` is the command to log in to a specific server, in this case `root://dtn2304.jlab.org:8443`.
 
 When calling ls, we should see everything in this subfolder. In this case, all files from the **February 2026** campaign.
 
@@ -51,7 +51,7 @@ Files can also be copied locally by replacing `ls` with `cp`.
 It is also possible to copy a file and open it locally using the `xrdcp` command:
 ```bash
 ./eic-shell
-xrdcp root://dtn-eic.jlab.org//volatile/eic/EPIC/RECO/26.02.0/path-to-file .
+xrdcp root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/26.02.0/path-to-file .
 exit
 ```
 
@@ -67,7 +67,7 @@ In our earlier episode, we used this command to copy a file we found using Rucio
 It is also possible to open a file directly in ROOT if you have XrootD installed too. Note that the following command should be executed after opening root and `TFile::Open()` should be used:
 
 ```c++
-auto f = TFile::Open("root://dtn-eic.jlab.org//volatile/eic/EPIC/RECO/path-to-file")
+auto f = TFile::Open("root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/path-to-file")
 ```
 
 or using python and uproot:
@@ -75,7 +75,7 @@ or using python and uproot:
 ```python
 import uproot
 import XRootD
-file_path = "root://dtn-eic.jlab.org//volatile/eic/EPIC/RECO/path-to-file"
+file_path = "root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/path-to-file"
 root_file = uproot.open(file_path)
 ```
 
@@ -84,6 +84,6 @@ or directly with Pyroot:
 ```python
 import ROOT
 import XRootD
-file_path = "root://dtn-eic.jlab.org//volatile/eic/EPIC/RECO/path-to-file"
+file_path = "root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/path-to-file"
 file = ROOT.TFile.Open(file_path, "READ")
 ```
