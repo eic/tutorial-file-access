@@ -59,14 +59,14 @@ The name contains information about the dataset in question and contains informa
 
 As an example, consider the DID for the dataset:
 
-- `epic:/RECO/25.10.2/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x130/q2_10_20/pi+`
+- `epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x130/q2_10_20/pi+`
 
-The `name` here - `/RECO/25.10.2/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x130/q2_10_20/pi+`, tells us many things about the contents of this dataset. Let's break this down, examining the component enclosed within each pair of `/---/` -
+The `name` here - `/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x130/q2_10_20/pi+`, tells us many things about the contents of this dataset. Let's break this down, examining the component enclosed within each pair of `/---/` -
 
 - `RECO`
   - This tells us that the DID contains reconstructed output file information
-- `25.10.2`
-  - This tells us that the `25.10.2` software release was used, the October 2025 release (version 2).
+- `26.04.1`
+  - This tells us that the `26.04.1` software release was used, the April 2026 release (version 1).
 - `epic_craterlake`
   - This tells us that the `epic_craterlake` detector configuration was used in the simulation
 - `EXCLUSIVE`
@@ -129,7 +129,7 @@ Remember that campaigns older than ~6 months will not be instantly accessible. T
 Working backwards from the full DID we had earlier, we could combine in the software release, detector configuration, process and generator to narrow down the list of DIDs:
 
 ```bash
-rucio did list epic:/RECO/25.10.2/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/\*
+rucio did list epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/\*
 ```
 
 We now have a more manageable list and we can see that we have some different beam energy configurations and Q2 ranges available. Note that we can list just the DID itself by adding `--short` as a prefix to our `did list` call.
@@ -137,7 +137,7 @@ We now have a more manageable list and we can see that we have some different be
 We could also make slightly better use of wildcards in this command too:
 
 ```bash
-rucio did list epic:*RECO*25.10.2*DEMP*
+rucio did list epic:*RECO*26.04.1*DEMP*
 ```
 
 But as above, this does require some knowledge of what our DID looks like to begin with.
@@ -161,19 +161,19 @@ rucio did content list scope:name
 e.g.
 
 ```bash
-rucio did content list epic:/RECO/25.10.2/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
+rucio did content list epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
 ```
 
 Again, a lot of output. We see though that this DID is for a dataset of a large number of files. We can again use `--short` to just get this as a list:
 
 ```bash
-rucio did content list --short epic:/RECO/25.10.2/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
+rucio did content list --short epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
 ```
 
 We can check where a specific file in our dataset is stored too:
 
 ```bash
-rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/25.10.2/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root
+rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0001.eicrecon.edm4eic.root
 ```
 
 ::::::::::::::::::::::::::::::::::::::::::::: callout
@@ -183,7 +183,7 @@ rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/2
 Despite the slightly misleading command above, we can actually just provide a dataset DID here too. If we do so, we will get the location of all files in the dataset in one command, e.g:
 
 ```bash
-rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/25.10.2/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
+rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
 ```
 You could pipe this to a file for later usage. However, note that replicas may exist for a given file. Both would be printed by this command as is. You can check if multiple copies exist via:
 ```bash
@@ -191,13 +191,13 @@ rucio rule list --did scope:name
 ```
 e.g.
 ```bash
-rucio rule list --did epic:/RECO/25.10.2/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
+rucio rule list --did epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
 ```
 This will list where the DID is stored and how many copies exist.
 
 :::::::::::::::::::::::::::::::::::::::::::::
 
-The `root://dtn2304.jlab.org:8443` at the start of the output tells us that this particular file is stored on JLab servers. As mentioned in the outset, Rucio works across multiple sites easily, however, methods which we might use to stream files do not. **As such, being able to check where our files are stored is a useful feature.**
+The `root://epicxrd1.sdcc.bnl.gov:1095` at the start of the output tells us that this particular file is stored on BNL servers. As mentioned in the outset, Rucio works across multiple sites easily, however, methods which we might use to stream files do not. **As such, being able to check where our files are stored is a useful feature.**
 
 So, we can find DIDs, check what they are and what they contain. To get to this point though, we needed some pre-knowledge of what the DID looked like which isn't necessarily that helpful for finding something. However, a much easier approach to finding what we need is to use the metadata tags that are assigned all DIDs from March 2026 onwards.
 
@@ -364,7 +364,7 @@ rucio download scope:name
 So to download our file from earlier, we just do:
 
 ```bash
-rucio download epic:/RECO/25.10.2/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root
+rucio download epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0001.eicrecon.edm4eic.root
 ```
 
 By default it will download to our current directory with its original name. In this case, that's unfortunate because as we noticed earlier, this looks a lot like a UNIX file path. As such, we now have a large number of nested directories to go through before we get to our file!
@@ -384,7 +384,7 @@ We can *stream* files from a full dataset rather than downloading them as we'll 
 It might actually be easier to use [XrootD](../learners/xrootd.md) to grab our file as it's a bit more intuitive, we do need our location from earlier for this though:
 
 ```bash
-xrdcp root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/25.10.2/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root ./
+xrdcp $(rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0001.eicrecon.edm4eic.root | head -1) ./
 ```
 
 Where `./` is our current directory, this time, we'll just get the actual file! We could also specify a new name if desired in place of just `./`.
@@ -392,7 +392,7 @@ Where `./` is our current directory, this time, we'll just get the actual file! 
 Our full path, including location, as used here, will also be useful if we want to stream our files directly in a script. In ROOT, we could just do:
 
 ```c++
-auto f = TFile::Open("root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/25.10.2/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root")
+auto f = TFile::Open("root://epicxrd1.sdcc.bnl.gov:1095//eic/EPIC//RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0001.eicrecon.edm4eic.root")
 ```
 
 or using python and uproot:
@@ -400,7 +400,7 @@ or using python and uproot:
 ```python
 import uproot
 import XRootD
-file_path = "root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/25.10.2/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root"
+file_path = "root://epicxrd1.sdcc.bnl.gov:1095//eic/EPIC//RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0001.eicrecon.edm4eic.root"
 root_file = uproot.open(file_path)
 ```
 
@@ -409,7 +409,7 @@ or directly with Pyroot:
 ```python
 import ROOT
 import XRootD
-file_path = "root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/25.10.2/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root"
+file_path = "root://epicxrd1.sdcc.bnl.gov:1095//eic/EPIC//RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0001.eicrecon.edm4eic.root"
 file = ROOT.TFile.Open(file_path, "READ")
 ```
 
@@ -421,7 +421,7 @@ To test the ROOT approach, we can make a macro called `Test.C` and add:
 
 ```c++
 void Test(){
-  auto f = TFile::Open("root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/25.10.2/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root");
+  auto f = TFile::Open("root://epicxrd1.sdcc.bnl.gov:1095//eic/EPIC//RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0001.eicrecon.edm4eic.root");
   auto tree = f->Get<TTree>("events");
   Long64_t nEntries = tree->GetEntries(); // read the number of entries in the tree
   cout << nEntries << " events in tree" << endl;
@@ -435,7 +435,7 @@ Similarly in Python, we can make `Test.py` and use Uproot:
 ```python
 import uproot
 import XRootD
-file_path = "root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/25.10.2/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root"
+file_path = "root://epicxrd1.sdcc.bnl.gov:1095//eic/EPIC//RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0001.eicrecon.edm4eic.root"
 root_file = uproot.open(file_path)
 print(root_file['events'].num_entries, "events in this tree.")
 ```
@@ -444,7 +444,7 @@ or directly using PyRoot:
 ```python
 import ROOT
 import XRootD
-file_path = "root://dtn2304.jlab.org:8443//jlab-osdf-ro/eic/EPIC/volatile/RECO/25.10.2/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0550.eicrecon.edm4eic.root"
+file_path = "root://epicxrd1.sdcc.bnl.gov:1095//eic/EPIC//RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0001.eicrecon.edm4eic.root"
 file = ROOT.TFile.Open(file_path, "READ")
 print((file.Get("events")).GetEntries(), "events in this tree.")
 ```
