@@ -92,7 +92,7 @@ Using the suggested tags, find the **latest** available datasets for:
 
 Filter on the relevant tags (using the latest `software_release` available), for example:
 
-```bash
+```{.bash .ci}
 rucio did list --short --filter 'software_release=26.*, requester_pwg==inclusive, electron_beam_energy_gev==10, ion_beam_energy_gev==130, ion_species==p, data_level==reconstruction' 'epic:*'
 ```
 
@@ -150,7 +150,7 @@ rucio replica list file --protocols root --pfns --rses isopenaccess scope:name_o
 
 This could then be processed in the script:
 
-```c++
+```{.cpp .ci file="FileListProcess.C"}
 void FileListProcess(){
   string line;
   ifstream fstream ("FileList");
@@ -174,7 +174,7 @@ void FileListProcess(){
 
 or if they're using python:
 
-```python
+```{.python .ci file="FileListProcess.py"}
 import ROOT
 import uproot
 import XRootD
@@ -199,6 +199,14 @@ with open('FileList', 'r') as file:
     # print(ak.type(chunk))
 ```
 
+For example, for the DEMP dataset from the last episode, with the scripts saved as `FileListProcess.C` and `FileListProcess.py`:
+
+```{.bash .ci}
+rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+ > FileList
+root -l -b -q FileListProcess.C
+python3 FileListProcess.py
+```
+
 Note that we have restricted these examples to only print out the first five files in the list we created. We can comment out or change the lines as noted to process the full list (or adjust the cutoff value in the condition to process a different number).
 
 ::::::::::::::::::::::::::::::::::::::::::::: challenge
@@ -219,7 +227,7 @@ Using the suggested tags, find the **latest** available dataset for:
 Filter on the EpIC generator and the required beam energies, requiring no background mixing, for
 example:
 
-```bash
+```{.bash .ci}
 rucio did list --short --filter 'software_release=26.*, generator==epic, electron_beam_energy_gev==10, ion_beam_energy_gev==130, is_background_mixed==False' 'epic:*'
 ```
 
@@ -274,7 +282,7 @@ Using combinations of the suggested tags, find the **latest** available dataset(
 
 Filter on the `kaon-` particle gun using the latest `software_release`, for example:
 
-```bash
+```{.bash .ci}
 rucio did list --short --filter 'software_release=26.*, generator==single_particle, gun_particle==kaon-' 'epic:*'
 ```
 
