@@ -128,7 +128,7 @@ Remember that campaigns older than ~6 months will not be instantly accessible. T
 
 Working backwards from the full DID we had earlier, we could combine in the software release, detector configuration, process and generator to narrow down the list of DIDs:
 
-```bash
+```{.bash .ci}
 rucio did list epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/\*
 ```
 
@@ -136,7 +136,7 @@ We now have a more manageable list and we can see that we have some different be
 
 We could also make slightly better use of wildcards in this command too:
 
-```bash
+```{.bash .ci}
 rucio did list epic:*RECO*26.04.1*DEMP*
 ```
 
@@ -160,19 +160,19 @@ rucio did content list scope:name
 
 e.g.
 
-```bash
+```{.bash .ci}
 rucio did content list epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
 ```
 
 Again, a lot of output. We see though that this DID is for a dataset of a large number of files. We can again use `--short` to just get this as a list:
 
-```bash
+```{.bash .ci}
 rucio did content list --short epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
 ```
 
 We can check where a specific file in our dataset is stored too:
 
-```bash
+```{.bash .ci}
 rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0001.eicrecon.edm4eic.root
 ```
 
@@ -182,7 +182,7 @@ rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/2
 
 Despite the slightly misleading command above, we can actually just provide a dataset DID here too. If we do so, we will get the location of all files in the dataset in one command, e.g:
 
-```bash
+```{.bash .ci}
 rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
 ```
 You could pipe this to a file for later usage. However, note that replicas may exist for a given file. Both would be printed by this command as is. You can check if multiple copies exist via:
@@ -190,7 +190,7 @@ You could pipe this to a file for later usage. However, note that replicas may e
 rucio rule list --did scope:name
 ```
 e.g.
-```bash
+```{.bash .ci}
 rucio rule list --did epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+
 ```
 This will list where the DID is stored and how many copies exist.
@@ -294,13 +294,13 @@ rucio did list --filter 'TAG==*' 'scope:*'
 
 So, as an example, we could list all DIDs with electron beam energies of 10 GeV via:
 
-```bash
+```{.bash .ci}
 rucio did list --filter 'electron_beam_energy_gev==10' 'epic:*'
 ```
 
 We can also combine tags and filter on several at once, e.g:
 
-```bash
+```{.bash .ci}
 rucio did list --filter 'electron_beam_energy_gev==10, ion_beam_energy_gev==250' 'epic:*'
 ```
 
@@ -316,7 +316,7 @@ Note that in our examples we use `==` with our filters, but other logical expres
 
 Note that we can also use wildcards in our tag searches. This could be helpful if we don't know if a particular dataset was run in a specific campaign for example. We could do:
 
-```bash
+```{.bash .ci}
 rucio did list --filter 'software_release=26.*, electron_beam_energy_gev==10' 'epic:*'
 ```
 
@@ -338,7 +338,7 @@ Using tags, find the DIDs of the **latest**:
 Combine the relevant tags in a single filtered `did list`, using the most recent `software_release`
 you find available, for example:
 
-```bash
+```{.bash .ci}
 rucio did list --short --filter 'software_release=26.*, generator==dempgen, electron_beam_energy_gev==10, ion_beam_energy_gev==250, q2_min_gev2==3, q2_max_gev2==10' 'epic:*'
 ```
 
@@ -363,7 +363,7 @@ rucio download scope:name
 
 So to download our file from earlier, we just do:
 
-```bash
+```{.bash .ci}
 rucio download epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0001.eicrecon.edm4eic.root
 ```
 
@@ -383,7 +383,7 @@ We can *stream* files from a full dataset rather than downloading them as we'll 
 
 It might actually be easier to use [XrootD](../learners/xrootd.md) to grab our file as it's a bit more intuitive, we do need our location from earlier for this though:
 
-```bash
+```{.bash .ci}
 xrdcp $(rucio replica list file --protocols root --pfns --rses isopenaccess epic:/RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0001.eicrecon.edm4eic.root | head -1) ./
 ```
 
@@ -397,7 +397,7 @@ auto f = TFile::Open("root://epicxrd1.sdcc.bnl.gov:1095//eic/EPIC//RECO/26.04.1/
 
 or using python and uproot:
 
-```python
+```{.python .ci}
 import uproot
 import XRootD
 file_path = "root://epicxrd1.sdcc.bnl.gov:1095//eic/EPIC//RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0001.eicrecon.edm4eic.root"
@@ -406,7 +406,7 @@ root_file = uproot.open(file_path)
 
 or directly with Pyroot:
 
-```python
+```{.python .ci}
 import ROOT
 import XRootD
 file_path = "root://epicxrd1.sdcc.bnl.gov:1095//eic/EPIC//RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0001.eicrecon.edm4eic.root"
@@ -419,7 +419,7 @@ We can quickly check the three methods above work.
 
 To test the ROOT approach, we can make a macro called `Test.C` and add:
 
-```c++
+```{.cpp .ci file="Test.C"}
 void Test(){
   auto f = TFile::Open("root://epicxrd1.sdcc.bnl.gov:1095//eic/EPIC//RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0001.eicrecon.edm4eic.root");
   auto tree = f->Get<TTree>("events");
@@ -428,11 +428,15 @@ void Test(){
 }
 ```
 
-If we run this script with `root Test.C`, it should stream our file and print the number of entries (the number of events) in the file.
+If we run this script with `root Test.C`, it should stream our file and print the number of entries (the number of events) in the file. Without the interactive ROOT prompt:
+
+```{.bash .ci}
+root -l -b -q Test.C
+```
 
 Similarly in Python, we can make `Test.py` and use Uproot:
 
-```python
+```{.python .ci}
 import uproot
 import XRootD
 file_path = "root://epicxrd1.sdcc.bnl.gov:1095//eic/EPIC//RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0001.eicrecon.edm4eic.root"
@@ -441,7 +445,7 @@ print(root_file['events'].num_entries, "events in this tree.")
 ```
 or directly using PyRoot:
 
-```python
+```{.python .ci}
 import ROOT
 import XRootD
 file_path = "root://epicxrd1.sdcc.bnl.gov:1095//eic/EPIC//RECO/26.04.1/epic_craterlake/EXCLUSIVE/DEMP/DEMPgen-1.2.4/10x250/q2_3_10/pi+/DEMPgen-1.2.4_10x250_pi+_q2_3_10_ab.0001.eicrecon.edm4eic.root"
